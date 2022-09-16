@@ -2,8 +2,11 @@
   "name": "movie-api-client",
   "version": "1.0.0",
   "description": "client side of moviebase",
+  "source": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-rc.0"
+    "@parcel/transformer-sass": "^2.0.0-rc.0",
+    "parcel": "^2.7.0",
+    "process": "^0.11.10"
   }
 }
