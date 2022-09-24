@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
@@ -11,12 +12,13 @@ export class MainView extends React.Component {
         super(); // super() is code that is executed as soon as the conponent is created in memeory. happens before rendering. gives class the features of parent React.Component. super() is mandatory whenever constructor() is used.
         this.state = {
             movies: [],
-            selectedMovie: null
+            selectedMovie: null,
+            user: null
         };
     }
 
     componentDidMount() {
-        axios.get('https://https://davemoviebase.herokuapp.com/movies')
+        axios.get('https://davemoviebase.herokuapp.com/movies')
             .then(response => {
                 this.setState({
                     movies: response.data
@@ -27,19 +29,35 @@ export class MainView extends React.Component {
             });
     }
 
-    setSelectedMovie(newSelectedMovie) {
+    /*When a movie is clicked, this funciton is invoked and updates the state of the 'selectedMovie' property to that movie*/
+
+    setSelectedMovie(movie) {
         this.setState({
-            selectedMovie: newSelectedMovie
+            selectedMovie: movie
+        });
+    }
+
+    /* when a user succesfullly logs in, this function updates the 'user' property in state to that particular user */
+
+    onLoggedIn(user) {
+        this.setState({
+            user
         });
     }
 
     render() {
-        const { movies, selectedMovie } = this.state;
+        const { movies, selectedMovie, user } = this.state;
 
+        /* if there is no user, the LoginView is rendered. if there is a user logged in, the user details are passed as a prop to the LoginView */
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+
+        // before the movies have been loaded
         if (movies.length === 0) return <div className="main-view" />;
 
         return (
             <div className="main-view">
+                {/*if the state of 'selectedMovie' is not null, that selected movie will be returned, otherwise all movies will be returned. 
+            ask mentor about this block and reactDom.render vs createRoot error in console   */}
                 {selectedMovie
                     ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                     : movies.map(movie => (
