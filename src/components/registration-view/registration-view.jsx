@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 export function RegistrationView(props) {
-    const [username, SetUsername] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [birthday, setBirthday] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
+        console.log(username, password, email, birthday);
         props.onRegister(username);
     };
 
@@ -31,6 +34,13 @@ export function RegistrationView(props) {
             <button type="submit" onClick={handleSubmit}></button>
         </form>
     )
-
-
 }
+
+RegistrationView.PropTypes = {
+    user: PropTypes.exact({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Birthday: PropTypes.number.isRequired
+    })
+};

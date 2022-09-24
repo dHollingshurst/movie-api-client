@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
-import { RegistrationView } from "../registration-view/registration-view";
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
@@ -30,3 +30,10 @@ export function LoginView(props) {
         </form>
     );
 }
+
+LoginView.PropTypes = {
+    user: PropTypes.exact({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired
+    })
+};
