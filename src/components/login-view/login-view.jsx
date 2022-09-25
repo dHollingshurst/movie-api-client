@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { Form, Button, Card, CardHeader, CardGroup, CardHeader, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
 import './login-view.scss';
 import axios from "axios";
+import { render } from "react-dom";
 
 
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,9 +20,11 @@ export function LoginView(props) {
         props.onLoggedIn(username);
     };
 
-
+    // render() {
+    //     const {register, onRegisterClick} = this.props;
+    // }
     return (
-        // const {onRegisterClick} //
+
         <div className="login-view">
             <Navbar className=" flixBar mb-5" bg="dark" variant="dark">
                 <Container className="navContainer" fluid>
@@ -30,7 +34,7 @@ export function LoginView(props) {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text className="navText">
-                            New user? <a href="#register" className="signUp">Sign up</a>
+                            New user? <Button onClick={() => onRegisterClick(register)}>Sign up</Button>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>
