@@ -20,6 +20,7 @@ export function LoginView(props) {
 
 
     return (
+        // const {onRegisterClick} //
         <div className="login-view">
             <Navbar className=" flixBar mb-5" bg="dark" variant="dark">
                 <Container className="navContainer" fluid>
