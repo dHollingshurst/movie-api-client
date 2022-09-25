@@ -2,11 +2,21 @@
   color: #fff;
 }
 
-.movieCard, .movieImg {
+.movieCard {
+  max-height: -moz-fit-content;
+  max-height: fit-content;
   background-color: #f5f5f5;
 }
 
-.movie-poster, .poster-img {
+.movieImg {
+  background-color: #fff;
+}
+
+.movie-poster {
+  background-color: #fff;
+}
+
+.poster-img {
   background-color: #f5f5f5;
 }
 

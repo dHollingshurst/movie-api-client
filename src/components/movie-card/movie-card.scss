@@ -1,10 +1,14 @@
+$color: white;
+$cardColor: whitesmoke;
+
+
 .movieCard {
-    background-color: whitesmoke;
+    background-color: $cardColor;
+    max-height: fit-content;
+
 }
 
-
-
 .movieImg {
-    background-color: whitesmoke;
+    background-color: $color;
 
 }

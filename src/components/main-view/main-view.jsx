@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
+import { Container, Row, Col, Navbar, Nav, Button, Card, CardGroup } from 'react-bootstrap';
 
 
 import { LoginView } from '../login-view/login-view';
@@ -18,7 +18,8 @@ export class MainView extends React.Component {
         this.state = {
             movies: [],
             selectedMovie: null,
-            user: null
+            user: null,
+            registered: null
         };
     }
 
@@ -52,20 +53,21 @@ export class MainView extends React.Component {
 
     // when a user succesfully registers
 
-    onRegister(register) {
+    onRegister(registered) {
+
         this.setState({
-            register
+            registered
         });
     }
 
     render() {
-        const { movies, selectedMovie, user, register } = this.state;
+        const { movies, selectedMovie, user, registered } = this.state;
 
         /* if there is no user, the LoginView is rendered. if there is a user logged in, the user details are passed as a prop to the LoginView */
         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
         // if the user is not registered
-        //if (!register) return <RegistrationView onRegister={register => this.onRegister(register)} />;//
+        if (!registered) return <RegistrationView onRegister={registered => this.onRegister(registered)} />;
 
         // before the movies have been loaded
         if (movies.length === 0) return <div className="main-view" />;
@@ -94,6 +96,7 @@ export class MainView extends React.Component {
                                 </Col>
                             )
                             : movies.map(movie => (
+
                                 <Col sm={12} md={8} lg={3}>
                                     <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                                 </Col>
