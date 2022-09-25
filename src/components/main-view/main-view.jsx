@@ -1,11 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Container, Row, Col, Navbar, Nav, Button } from 'react-bootstrap';
+
 
 import { LoginView } from '../login-view/login-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
+import './main-view.scss';
 
 export class MainView extends React.Component {
 
@@ -62,21 +65,43 @@ export class MainView extends React.Component {
         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
         // if the user is not registered
-        //if (!register) return <RegistrationView onRegister={register => this.onRegister(register)} />;
+        //if (!register) return <RegistrationView onRegister={register => this.onRegister(register)} />;//
 
         // before the movies have been loaded
         if (movies.length === 0) return <div className="main-view" />;
 
         return (
-            <div className="main-view">
-                {/*if the state of 'selectedMovie' is not null, that selected movie will be returned, otherwise all movies will be returned. 
-            ask mentor about this block and reactDom.render vs createRoot error in console   */}
-                {selectedMovie
-                    ? <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
-                    : movies.map(movie => (
-                        <MovieCard key={movie._id} movie={movie} onMovieClick={(newSelectedMovie) => { this.setSelectedMovie(newSelectedMovie) }} />
-                    ))
-                }
+            <div className='main-view'>
+                <Navbar className="mb-5" bg="dark" expand="lg" variant="dark">
+
+                    <Container fluid>
+
+                        <Navbar.Brand href="index.html">My-Flix</Navbar.Brand>
+                        <Navbar.Toggle />
+                        <Navbar.Collapse className="justify-content-end">
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
+
+
+                <Container>
+
+                    <Row className="main-view justify-content-md-center">
+                        {selectedMovie
+                            ? (
+                                <Col className='' md={8} sm={12}>
+                                    <MovieView movie={selectedMovie} onBackClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+                                </Col>
+                            )
+                            : movies.map(movie => (
+                                <Col sm={12} md={8} lg={3}>
+                                    <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
+                                </Col>
+                            ))
+                        }
+                    </Row>
+                </Container>
+
             </div>
         );
     }

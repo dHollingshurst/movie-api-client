@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
+import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
+
 
 export function RegistrationView(props) {
     const [username, setUsername] = useState('');
@@ -14,25 +16,37 @@ export function RegistrationView(props) {
     };
 
     return (
-        <form>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Password:
-                <input type="text" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <label>
-                Email:
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
-            </label>
-            <label>
-                Birthday:
-                <input type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-            </label>
+        <Form>
+            <Form.Group>
+                <Form.Label>Username: </Form.Label>
+                <Form.Control type="text"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    placeholder="Enter username"
+                    required />
+            </Form.Group>
+
+
+            <Form.Group>
+                <Form.Label>PassWord: </Form.Label>
+                <Form.Control
+                    type="text" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" required />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Email: </Form.Label>
+                <Form.Control
+                    type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter Email" required />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Birthday: </Form.Label>
+                <Form.Control
+                    type="date" value={password} onChange={e => setBirthday(e.target.value)} placeholder="Enter Birthday" required />
+            </Form.Group>
+
             <button type="submit" onClick={handleSubmit}></button>
-        </form>
+        </Form >
     )
 }
 

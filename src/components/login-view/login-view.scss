@@ -1,0 +1,11 @@
+$color: white;
+$cardColor: whitesmoke;
+
+.app-container,
+html {
+    background: $color;
+}
+
+.loginBody {
+    background: $cardColor;
+}
