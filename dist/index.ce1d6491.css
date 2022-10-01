@@ -3,20 +3,14 @@
 }
 
 .movieCard {
-  max-height: -moz-fit-content;
-  max-height: fit-content;
+  display: flex;
+}
+
+.movieImg, .main-card, .card-body {
   background-color: #f5f5f5;
 }
 
-.movieImg {
-  background-color: #fff;
-}
-
-.movie-poster {
-  background-color: #fff;
-}
-
-.poster-img {
+.movie-poster, .poster-img {
   background-color: #f5f5f5;
 }
 
@@ -30,6 +24,10 @@
 
 .main-view {
   background: #fff;
+}
+
+.movie-card {
+  display: flex;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

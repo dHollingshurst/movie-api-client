@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Form, Button, Card, CardHeader, CardGroup, CardHeader, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
+import { Form, Button, Card, CardHeader, CardGroup, CardHeader, Container, Col, Row, Navbar, Nav, Button } from 'react-bootstrap';
 import './login-view.scss';
 import axios from "axios";
 import { render } from "react-dom";
+
 
 
 
@@ -14,15 +15,19 @@ export function LoginView(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
-        /* send request to server for authentication */
-        /* then call props.onLoggeIn(username) */
-        props.onLoggedIn(username);
+        axios.post('https://davemoviebase.herokuapp.com/login', {
+            Username: username,
+            Password: password
+        })
+            .then(response => {
+                const data = response.data;
+                props.onLoggedIn(data);
+            })
+            .catch(e => {
+                console.log('no such user')
+            });
     };
 
-    // render() {
-    //     const {register, onRegisterClick} = this.props;
-    // }
     return (
 
         <div className="login-view">
@@ -34,7 +39,10 @@ export function LoginView(props) {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text className="navText">
-                            New user? <Button onClick={() => onRegisterClick(register)}>Sign up</Button>
+                            New user?
+                            <Button>
+                                Sign up
+                            </Button>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>
@@ -109,4 +117,5 @@ LoginView.PropTypes = {
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired
     })
+
 };

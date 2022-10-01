@@ -3,12 +3,18 @@ $cardColor: whitesmoke;
 
 
 .movieCard {
-    background-color: $cardColor;
-    max-height: fit-content;
+    display: flex;
 
 }
 
 .movieImg {
-    background-color: $color;
+    background-color: $cardColor;
+}
 
+.main-card {
+    background-color: $cardColor;
+}
+
+.card-body {
+    background-color: $cardColor;
 }

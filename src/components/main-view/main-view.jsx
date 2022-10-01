@@ -35,6 +35,20 @@ export class MainView extends React.Component {
             });
     }
 
+    getMovies(token) {
+        axios.get('https://davemoviebase.herokuapp.com/movies', {
+            headers: { Authorization: 'Bearer ${token}' }
+        })
+            .then(response => {
+                this.setState({
+                    movies: response.data
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
     /*When a movie is clicked, this funciton is invoked and updates the state of the 'selectedMovie' property to that movie*/
 
     setSelectedMovie(movie) {
@@ -45,23 +59,24 @@ export class MainView extends React.Component {
 
     /* when a user succesfullly logs in, this function updates the 'user' property in state to that particular user */
 
-    onLoggedIn(user) {
+    onLoggedIn(authData) {
+        console.log(authData);
         this.setState({
-            user
+            user: authData.user.Username
         });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
     }
+
+
 
     // when a user succesfully registers
 
-    onRegister(registered) {
-
-        this.setState({
-            registered
-        });
-    }
 
     render() {
-        const { movies, selectedMovie, user, registered } = this.state;
+        const { movies, selectedMovie, user, registered, selectRegister } = this.state;
 
         /* if there is no user, the LoginView is rendered. if there is a user logged in, the user details are passed as a prop to the LoginView */
         if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
@@ -97,7 +112,7 @@ export class MainView extends React.Component {
                             )
                             : movies.map(movie => (
 
-                                <Col sm={12} md={8} lg={3}>
+                                <Col sm={12} md={8} lg={3} className="movie-card">
                                     <MovieCard key={movie._id} movie={movie} onMovieClick={newSelectedMovie => { this.setSelectedMovie(newSelectedMovie); }} />
                                 </Col>
                             ))
