@@ -4,6 +4,7 @@ import { Form, Button, Card, CardHeader, CardGroup, CardHeader, Container, Col, 
 import './login-view.scss';
 import axios from "axios";
 import { render } from "react-dom";
+import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
 
 
 
@@ -132,7 +133,7 @@ export function LoginView(props) {
 }
 
 LoginView.propTypes = {
-    user: PropTypes.exact({
+    user: PropTypes.shape({
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired
     })

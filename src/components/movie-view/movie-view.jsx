@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
 import './movie-view.scss';
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
+
 
 export class MovieView extends React.Component {
 

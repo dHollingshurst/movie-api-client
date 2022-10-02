@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
 import axios from "axios";
+import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
 
 
 export function RegistrationView(props) {
@@ -22,7 +23,7 @@ export function RegistrationView(props) {
     // validate user inputs
     const validate = () => {
         let isReq = true;
-        if (name) {
+        if (!name) {
             setValues({ ...values, nameErr: 'Name is required' });
             isReq = false;
         }
@@ -68,7 +69,7 @@ export function RegistrationView(props) {
                     const data = response.data;
                     console.log(data);
                     alert('Registration succesful, please login.');
-                    window.open('/', '_self'); // the second argument _self is necessary so taht the pae will open in the curent tab
+                    window.open("/", "_self"); // the second argument _self is necessary so taht the pae will open in the curent tab
                 })
                 .catch(response => {
                     console.error(response);
