@@ -38,6 +38,17 @@ export class MainView extends React.Component {
         }
     }
 
+    onLoggedIn(authData) {
+        console.log(authData);
+        this.setState({
+            user: authData.user.Username
+        });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
+    }
+
     getMovies(token) {
         axios.get('https://davemoviebase.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` }
@@ -50,28 +61,6 @@ export class MainView extends React.Component {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-
-
-    /*When a movie is clicked, this funciton is invoked and updates the state of the 'selectedMovie' property to that movie*/
-
-    /* setSelectedMovie(movie) {
-        this.setState({
-            selectedMovie: movie
-        });
-    }
- */
-    /* when a user succesfullly logs in, this function updates the 'user' property in state to that particular user */
-
-    onLoggedIn(authData) {
-        console.log(authData);
-        this.setState({
-            user: authData.user.Username
-        });
-
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.Username);
-        this.getMovies(authData.token);
     }
 
     onLoggedOut() {

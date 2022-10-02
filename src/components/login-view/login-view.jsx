@@ -43,7 +43,7 @@ export function LoginView(props) {
         e.preventDefault();
         const isReq = validate();
         if (isReq) {
-            axios.post('https://davemoviebase.herokuapp.com/login', {
+            axios.post('https://davemoviebase.herokuapp.com/', {
                 Username: username,
                 Password: password
             })
