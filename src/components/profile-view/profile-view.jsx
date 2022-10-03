@@ -82,7 +82,6 @@ export function ProfileView(props) {
                     headers: { Authorization: `Bearer ${token}` }
                 },
                 {
-                    Name: name,
                     Username: username,
                     Password: password,
                     Email: email,

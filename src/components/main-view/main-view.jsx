@@ -74,7 +74,7 @@ export class MainView extends React.Component {
 
 
     render() {
-        const { movies, user, Username } = this.state;
+        const { movies, user, Username, username, UserUpdate } = this.state;
 
         return (
             <Router>
@@ -191,21 +191,21 @@ export class MainView extends React.Component {
                             }}
                         />
 
-                        {/*   <Route
+                        {/*      <Route
                             path="/users/:Username"
                             render={({ match, history }) => {
                                 if (!user) return
                                 <Redirect to="/" />;
                                 return (
                                     <Col>
-                                        <UserUpdate
+                                        <ProfileView
                                             user={user}
                                             onBackClick={() => history.goBack()} />
                                     </Col>
                                 );
                             }}
-                        /> */}
-
+                        />
+ */}
                     </Row>
                 </Container>
             </Router>
