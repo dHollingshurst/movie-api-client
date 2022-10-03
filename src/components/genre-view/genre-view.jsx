@@ -19,7 +19,7 @@ export class GenreView extends React.Component {
                                 {genre.Description}
                             </Card.Text>
 
-                            <Card.Text>
+                            {/*     <Card.Text>
                                 <Row className="justify-content-center mt-3">
                                     {genreMovies.map((movie) => (
                                         <MovieCard
@@ -29,7 +29,7 @@ export class GenreView extends React.Component {
                                         </MovieCard>
                                     ))}
                                 </Row>
-                            </Card.Text>
+                            </Card.Text> */}
 
                             <Button
                                 onClick={() => { onBackClick(null); }}>
