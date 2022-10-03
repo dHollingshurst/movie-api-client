@@ -172,23 +172,27 @@ export class MainView extends React.Component {
                             }} />
 
                         <Route
-                            path={`/users/${Username}`}
+                            path="/users/:Username"
                             render={({ history }) => {
                                 if (!user) return
-                                <Redirect to="/" />
-                                return (<Col>
-                                    <ProfileView
-                                        movies={movies}
-                                        user={user}
-                                        onBackClick={() => history.goBack()}
-                                    />
+                                <Col>
+                                    <Redirect to="/" />
                                 </Col>
+
+                                return (
+                                    <Col>
+                                        <ProfileView
+                                            movies={movies}
+                                            user={user}
+                                            onBackClick={() => history.goBack()}
+                                        />
+                                    </Col>
                                 );
                             }}
                         />
 
-                        <Route
-                            path={`/user-update/${Username}`}
+                        {/*   <Route
+                            path="/users/:Username"
                             render={({ match, history }) => {
                                 if (!user) return
                                 <Redirect to="/" />;
@@ -200,7 +204,7 @@ export class MainView extends React.Component {
                                     </Col>
                                 );
                             }}
-                        />
+                        /> */}
 
                     </Row>
                 </Container>
