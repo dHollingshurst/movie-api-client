@@ -79,13 +79,13 @@ export function ProfileView(props) {
         if (isReq) {
             axios.put(`https://davemoviebase.herokuapp.com/users/${Username}`,
                 {
+                    headers: { Authorization: `Bearer ${token}` }
+                },
+                {
                     Username: username,
                     Password: password,
                     Email: email,
                     Birthday: birthday
-                },
-                {
-                    headers: { Authorization: `Bearer ${token}` }
                 })
                 .then((response) => {
                     this.setState({
