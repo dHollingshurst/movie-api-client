@@ -55,7 +55,7 @@ export function ProfileView(props) {
 
     getUser = (token) => {
         const Username = localStorage.getItem('user');
-        axios.get('https://davemoviebase.herokuapp/users/Username', {
+        axios.get(`https://davemoviebase.herokuapp/users/${Username}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((response) => {
@@ -73,11 +73,11 @@ export function ProfileView(props) {
 
     const updateAccount = (e) => {
         e.preventDefault();
-        const username = localStorage.getItem("user");
+        const Username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         const isReq = validate();
         if (isReq) {
-            axios.put('https://davemoviebase.herokuapp.com/users/Username',
+            axios.put(`https://davemoviebase.herokuapp.com/users/${Username}`,
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 },
@@ -86,8 +86,7 @@ export function ProfileView(props) {
                     Password: password,
                     Email: email,
                     Birthday: birthday
-                }
-            )
+                })
                 .then((response) => {
                     this.setState({
                         Username: response.data.Username,

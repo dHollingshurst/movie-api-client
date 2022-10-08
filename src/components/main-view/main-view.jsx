@@ -173,7 +173,7 @@ export class MainView extends React.Component {
 
                         <Route
                             path="/users/:Username"
-                            render={({ history }) => {
+                            render={({ match, history }) => {
                                 if (!user) return
                                 <Col>
                                     <Redirect to="/" />
@@ -191,8 +191,8 @@ export class MainView extends React.Component {
                             }}
                         />
 
-                        {/*      <Route
-                            path="/users/:Username"
+                        {/*     <Route
+                            path="/users-update/:Username"
                             render={({ match, history }) => {
                                 if (!user) return
                                 <Redirect to="/" />;
@@ -204,8 +204,8 @@ export class MainView extends React.Component {
                                     </Col>
                                 );
                             }}
-                        />
- */}
+                        /> */}
+
                     </Row>
                 </Container>
             </Router>
