@@ -55,7 +55,7 @@ export function ProfileView(props) {
 
     getUser = (token) => {
         const Username = localStorage.getItem('user');
-        axios.get(`https://davemoviebase.herokuapp/users/${username}`, {
+        axios.get('https://davemoviebase.herokuapp/users/Username', {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((response) => {
@@ -77,7 +77,7 @@ export function ProfileView(props) {
         const token = localStorage.getItem("token");
         const isReq = validate();
         if (isReq) {
-            axios.put(`https://davemoviebase.herokuapp.com/users/${username}`,
+            axios.put('https://davemoviebase.herokuapp.com/users/Username',
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 },

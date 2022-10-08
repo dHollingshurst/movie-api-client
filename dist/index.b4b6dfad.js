@@ -47460,7 +47460,7 @@ function ProfileView(props) {
     };
     getUser = (token)=>{
         const Username = localStorage.getItem("user");
-        (0, _axiosDefault.default).get(`https://davemoviebase.herokuapp/users/${username}`, {
+        (0, _axiosDefault.default).get("https://davemoviebase.herokuapp/users/Username", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -47480,7 +47480,7 @@ function ProfileView(props) {
         const username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         const isReq = validate();
-        if (isReq) (0, _axiosDefault.default).put(`https://davemoviebase.herokuapp.com/users/${username}`, {
+        if (isReq) (0, _axiosDefault.default).put("https://davemoviebase.herokuapp.com/users/Username", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
