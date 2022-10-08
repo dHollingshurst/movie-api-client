@@ -46372,7 +46372,7 @@ var _movieViewScss = require("./movie-view.scss");
 var _reactRouterDom = require("react-router-dom");
 class MovieView extends (0, _reactDefault.default).Component {
     render() {
-        const { movie , onBackClick , handleFavorite , favMovies  } = this.props;
+        const { movie , onBackClick , handleFavorite , favMovies , isFavorite  } = this.props;
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                 xs: 12,
@@ -46487,7 +46487,7 @@ class MovieView extends (0, _reactDefault.default).Component {
                                     children: "Add to favorites"
                                 }, void 0, false, {
                                     fileName: "src/components/movie-view/movie-view.jsx",
-                                    lineNumber: 45,
+                                    lineNumber: 46,
                                     columnNumber: 29
                                 }, this)
                             ]
@@ -47847,9 +47847,9 @@ function ProfileView(props) {
             }, this),
             favMovies.length !== 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Row), {
                 className: "justify-content-center mt-3",
-                children: favoriteMovies.map((movieId)=>{
+                children: favMovies.map((movieId)=>{
                     let movie = movies.find((m)=>m._id === movieId);
-                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(FavoriteCard, {
+                    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _favCard.FavCard), {
                         movie: movie,
                         handleFavorite: handleFavorite,
                         children: [

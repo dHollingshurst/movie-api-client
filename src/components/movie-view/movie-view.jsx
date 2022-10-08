@@ -9,7 +9,7 @@ export class MovieView extends React.Component {
 
 
     render() {
-        const { movie, onBackClick, handleFavorite, favMovies } = this.props;
+        const { movie, onBackClick, handleFavorite, favMovies, isFavorite } = this.props;
 
         return (
             <Row>
@@ -42,6 +42,7 @@ export class MovieView extends React.Component {
                             </Card.Text>
 
                             <Button onClick={() => { onBackClick(null); }}>Back</Button>
+
                             <Button onClick={() => { handleFavorite(movie._id, 'add'); }}>Add to favorites</Button>
                         </Card.Body>
                     </Card >

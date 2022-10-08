@@ -192,17 +192,17 @@ export function ProfileView(props) {
             </Row>
             {favMovies.length !== 0 ? (
                 <Row className="justify-content-center mt-3">
-                    {favoriteMovies.map((movieId) => {
+                    {favMovies.map((movieId) => {
                         let movie = movies.find((m) => m._id === movieId);
                         return (
-                            <FavoriteCard
+                            <FavCard
                                 key={movieId}
                                 movie={movie}
                                 handleFavorite={handleFavorite}
                             >
                                 {movie.title}
                                 <Button onClick={() => { handleFavorite(movie._id, 'remove'); }}>Add to favorites</Button>
-                            </FavoriteCard>
+                            </FavCard>
                         );
                     })}
                 </Row>
