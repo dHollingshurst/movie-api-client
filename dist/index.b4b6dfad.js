@@ -47481,14 +47481,14 @@ function ProfileView(props) {
         const token = localStorage.getItem("token");
         const isReq = validate();
         if (isReq) (0, _axiosDefault.default).put(`https://davemoviebase.herokuapp.com/users/${Username}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }, {
             Username: username,
             Password: password,
             Email: email,
             Birthday: birthday
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
         }).then((response)=>{
             this.setState({
                 Username: response.data.Username,

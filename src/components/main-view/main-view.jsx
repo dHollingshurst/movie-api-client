@@ -191,8 +191,8 @@ export class MainView extends React.Component {
                             }}
                         />
 
-                        {/*     <Route
-                            path="/users-update/:Username"
+                        {/*    <Route
+                            path="/user-update/:Username"
                             render={({ match, history }) => {
                                 if (!user) return
                                 <Redirect to="/" />;
