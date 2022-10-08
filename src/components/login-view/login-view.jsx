@@ -112,9 +112,9 @@ export function LoginView(props) {
 
                                                 New user? <br />
 
-                                                <Button>
-                                                    Sign up
-                                                </Button>
+
+                                                <Link to={'/register'}>Sign up</Link>
+
                                             </Col>
                                         </Row>
                                     </Form>
