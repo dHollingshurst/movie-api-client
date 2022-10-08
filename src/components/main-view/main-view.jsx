@@ -25,7 +25,8 @@ export class MainView extends React.Component {
         super(); // super() is code that is executed as soon as the conponent is created in memeory. happens before rendering. gives class the features of parent React.Component. super() is mandatory whenever constructor() is used.
         this.state = {
             movies: [],
-            user: null
+            user: null,
+            favMovies: [],
         };
     }
 
@@ -72,9 +73,47 @@ export class MainView extends React.Component {
         });
     }
 
+    handleFavorite = (movieId, action) => {
+        const { user, favMovies } = this.state;
+        const Username = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+        if (token !== null && user !== null) {
+            if (action === 'add') {
+                this.setState({ favMovies: [...favMovies, movieId] });
+                axios.post(`https://davemoviebase.herokuapp.com/users/${Username}/movies/${movieId}`,
+                    {},
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
+                    .then((res) => {
+                        console.log('Movie added to favorites');
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            } else if (action === 'remove') {
+                this.setState({
+                    favMovies: favMovies.filter((id) => id !== movieId),
+                });
+                axios.delete(`https://davemoviebase.herokuapp.com/users/${Username}/movies/${movieId}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
+                    .then((res) => {
+                        console.log('Movie removied from favorites');
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
+        }
+    };
+
 
     render() {
-        const { movies, user, Username, username, UserUpdate } = this.state;
+        const { movies, user, Username, username, UserUpdate, favMovies } = this.state;
 
         return (
             <Router>
@@ -126,7 +165,9 @@ export class MainView extends React.Component {
                                 return (<Col md={8}>
                                     <MovieView
                                         movie={movies.find(m => m._id === match.params.movieId)}
-                                        onBackClick={() => history.goBack()} />
+                                        onBackClick={() => history.goBack()}
+                                        handleFavorite={this.handleFavorite}
+                                    />
                                 </Col>);
                             }} />
 
@@ -185,13 +226,15 @@ export class MainView extends React.Component {
                                             movies={movies}
                                             user={user}
                                             onBackClick={() => history.goBack()}
+                                            favMovies={favMovies || []}
+                                            handleFavorite={this.handleFavorite}
                                         />
                                     </Col>
                                 );
                             }}
                         />
 
-                        <Route
+                        {/*    <Route
                             path="/users-update/:Username"
                             render={({ match, history }) => {
                                 if (!user) return
@@ -200,7 +243,28 @@ export class MainView extends React.Component {
                                     <Col>
                                         <ProfileView
                                             user={user}
-                                            onBackClick={() => history.goBack()} />
+                                            movies={movies}
+                                            onBackClick={() => history.goBack()}
+                                            handleFavorite={this.handleFavorite}
+                                        />
+                                    </Col>
+                                );
+                            }}
+                        /> */}
+
+                        <Route
+                            path="/users/:Username/movies/:MovieID"
+                            render={({ match, history }) => {
+                                if (!user) return
+                                <Redirect to="/" />;
+                                return (
+                                    <Col>
+                                        <ProfileView
+                                            movies={movies}
+                                            user={user}
+                                            onBackClick={() => history.goBack()}
+                                            favMovies={favMovies}
+                                        />
                                     </Col>
                                 );
                             }}

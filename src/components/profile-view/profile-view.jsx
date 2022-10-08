@@ -4,6 +4,7 @@ import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
 import { render } from "react-dom";
+import { FavCard } from '../fav-card/fav-card';
 
 
 export function ProfileView(props) {
@@ -21,6 +22,9 @@ export function ProfileView(props) {
         passwordErr: '',
         emailErr: '',
     });
+
+    let favMovies = [];
+
 
     const validate = () => {
         let isReq = true;
@@ -83,6 +87,7 @@ export function ProfileView(props) {
                 },
                 {
                     Username: username,
+                    Name: name,
                     Password: password,
                     Email: email,
                     Birthday: birthday
@@ -90,6 +95,7 @@ export function ProfileView(props) {
                 .then((response) => {
                     this.setState({
                         Username: response.data.Username,
+                        Name: response.data.Name,
                         Password: response.data.Password,
                         Email: response.data.Email,
                         Birthday: response.data.Birthday
@@ -130,53 +136,85 @@ export function ProfileView(props) {
 
 
     return (
-        <Row className="mt-5">
-            <Col md={12}>
-                <Form>
-                    <h3>Edit information</h3>
-                    <p></p>
-                    <Form.Group controlId="formUsername" className="reg-form-inputs">
-                        <Form.Label>Username: </Form.Label>
-                        <Form.Control type="text"
-                            value={username}
-                            onChange={e => setUsername(e.target.value)}
-                            placeholder="Enter username" />
-                        {values.usernameErr && <p>{values.usernameErr}</p>}
-                    </Form.Group>
+        <div>
+            <Row className="mt-5">
+                <Col md={12}>
+                    <Form>
+                        <h3>Edit information</h3>
+                        <p></p>
+                        <Form.Group controlId="formUsername" className="reg-form-inputs">
+                            <Form.Label>Username: </Form.Label>
+                            <Form.Control type="text"
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                                placeholder="Enter username" />
+                            {values.usernameErr && <p>{values.usernameErr}</p>}
+                        </Form.Group>
 
-                    <Form.Group controlId="formName" className="reg-form-inputs">
-                        <Form.Label>Name:</Form.Label>
-                        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
-                        {values.nameErr && <p>{values.nameErr}</p>}
-                    </Form.Group>
+                        <Form.Group controlId="formName" className="reg-form-inputs">
+                            <Form.Label>Name:</Form.Label>
+                            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
+                            {values.nameErr && <p>{values.nameErr}</p>}
+                        </Form.Group>
 
 
-                    <Form.Group controlId="formPassword" className="reg-form-inputs">
-                        <Form.Label>PassWord: </Form.Label>
-                        <Form.Control
-                            type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" />
-                        {values.passwordErr && <p>{values.passwordErr}</p>}
-                    </Form.Group>
+                        <Form.Group controlId="formPassword" className="reg-form-inputs">
+                            <Form.Label>PassWord: </Form.Label>
+                            <Form.Control
+                                type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter Password" />
+                            {values.passwordErr && <p>{values.passwordErr}</p>}
+                        </Form.Group>
 
-                    <Form.Group controlId="Email" className="reg-form-inputs">
-                        <Form.Label>Email: </Form.Label>
-                        <Form.Control
-                            type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter Email" />
-                        {values.emailErr && <p>{values.emailErr}</p>}
-                    </Form.Group>
+                        <Form.Group controlId="Email" className="reg-form-inputs">
+                            <Form.Label>Email: </Form.Label>
+                            <Form.Control
+                                type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter Email" />
+                            {values.emailErr && <p>{values.emailErr}</p>}
+                        </Form.Group>
 
-                    <Form.Group controlId="updateBirthday">
-                        <Form.Label>Birthday: </Form.Label>
-                        <Form.Control
-                            type="date" name="birthday" onChange={e => setBirthday(e.target.value)} placeholder="Enter Birthday" required />
-                    </Form.Group>
+                        <Form.Group controlId="updateBirthday">
+                            <Form.Label>Birthday: </Form.Label>
+                            <Form.Control
+                                type="date" name="birthday" onChange={e => setBirthday(e.target.value)} placeholder="Enter Birthday" required />
+                        </Form.Group>
 
-                    <Button variant="primary" type="submit" onClick={updateAccount}>Submit</Button>
-                    <Button variant='warning' type='submit' onClick={handleDelete}>Delete account?</Button>
-                    <Link to={'/'}>Go back to Movies</Link>
-                </Form >
-            </Col>
-        </Row>
+                        <Button variant="primary" type="submit" onClick={updateAccount}>Submit</Button>
+                        <Button variant='warning' type='submit' onClick={handleDelete}>Delete account?</Button>
+                        <Link to={'/'}>Go back to Movies</Link>
+                    </Form >
+                </Col>
+            </Row>
+
+            <Row>
+                <Col >
+                    <h2>Favourite movies</h2>
+                </Col>
+            </Row>
+            {favMovies.length !== 0 ? (
+                <Row className="justify-content-center mt-3">
+                    {favoriteMovies.map((movieId) => {
+                        let movie = movies.find((m) => m._id === movieId);
+                        return (
+                            <FavoriteCard
+                                key={movieId}
+                                movie={movie}
+                                handleFavorite={handleFavorite}
+                            >
+                                {movie.title}
+                                <Button onClick={() => { handleFavorite(movie._id, 'remove'); }}>Add to favorites</Button>
+                            </FavoriteCard>
+                        );
+                    })}
+                </Row>
+            ) : (
+                <h2 className="subtitle">
+
+                    You don't have movies in your favorite movies list.
+
+                </h2>
+            )}
+        </div>
+
     );
 }
 
