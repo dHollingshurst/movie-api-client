@@ -4,7 +4,6 @@ import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
 import { render } from "react-dom";
-import { FavCard } from '../fav-card/fav-card';
 
 
 export function ProfileView(props) {
@@ -134,13 +133,13 @@ export function ProfileView(props) {
 
     return (
         <Container className="profile-container">
-            <Card bg="dark" text="light" className="profile-card">
+            <Card>
                 <Card.Header className="text-center" as="h5">
                     Profile
                 </Card.Header>
                 <Card.Body>
                     <CardGroup>
-                        <Card bg="dark" border="dark" text="light">
+                        <Card>
                             <span className="label text-center headline-profile-update">
                                 Update profile information
                             </span>
@@ -211,13 +210,13 @@ export function ProfileView(props) {
                                 </Button>
                             </Form>
                         </Card>
-                        <Card bg="dark" border="dark" text="light">
+                        <Card>
                             <span className="label text-center headline-profile-delete">
                                 Delete account
                             </span>
                             <Col>
                                 <Button
-                                    className="button button-profile-view-delete"
+
                                     variant="danger"
                                     type="submit"
                                     onClick={handleDelete}
@@ -227,31 +226,30 @@ export function ProfileView(props) {
                             </Col>
                         </Card>
                     </CardGroup>
-                    <CardGroup className="card-group-profile-mini-cards">
+                    <h3>Favorite Movies</h3>
+                    <CardGroup>
                         {favoriteMovies.map((m) => (
                             <Col
                                 md={6}
                                 lg={3}
                                 key={m._id}
-                                className="profile-movie-card-mini"
+
                             >
-                                <Card className="h-100" bg="dark" text="light">
+                                <Card>
                                     <Link
                                         to={`/movies/${m._id}`}
                                         className="profile-movie-card-link"
                                     >
-                                        <Card.Img
+                                        {/* <Card.Img
                                             variant="top"
                                             crossOrigin="anonymous | use-credentials"
                                             src={m.ImagePath}
-                                        />
+                                        /> */}
                                         <Card.Body>
                                             <Card.Title>{m.Title}</Card.Title>
                                         </Card.Body>
                                     </Link>
                                     <Button
-                                        className="button-profile-view-remove-favorite"
-                                        variant="outline-danger"
                                         size="sm"
                                         type="button"
                                         onClick={() => removeFavorite(m._id)}
@@ -263,9 +261,9 @@ export function ProfileView(props) {
                         ))}
                     </CardGroup>
                 </Card.Body>
-                <Card.Footer className="text-right">
+                <Card.Footer>
                     <Button
-                        className="button-profile-view-back"
+
                         variant="secondary"
                         onClick={() => {
                             onBackClick();

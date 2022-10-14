@@ -130,6 +130,7 @@ export class MainView extends React.Component {
 
     render() {
         const { movies, user, favoriteMovies } = this.state;
+        console.log(favoriteMovies);
 
         return (
             <Router>
