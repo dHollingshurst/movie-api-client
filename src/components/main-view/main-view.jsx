@@ -26,6 +26,7 @@ export class MainView extends React.Component {
         this.state = {
             movies: [],
             user: null,
+            favoriteMovies: [],
 
         };
     }
@@ -65,6 +66,59 @@ export class MainView extends React.Component {
             });
     }
 
+    addFavorite(movieId) {
+        const { user, favoriteMovies } = this.state;
+        const token = localStorage.getItem('token');
+        if (favoriteMovies.some((favId) => favId === movieId)) {
+            console.log('Movie already added to favorites!');
+        } else {
+            if (token !== null && user !== null) {
+                this.setState({
+                    favoriteMovies: [...favoriteMovies, movieId],
+                });
+                axios
+                    .post(
+                        `https://davemoviebase.herokuapp.com/users/${user}/movies/${movieId}`,
+                        {},
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    )
+                    .then((res) => {
+                        console.log(`Movie successfully added to favorites!`);
+                    })
+                    .catch((e) => {
+                        console.error(e);
+                    });
+            }
+        }
+    }
+
+    removeFavorite(movieId) {
+        const { user, favoriteMovies } = this.state;
+        const token = localStorage.getItem('token');
+        if (token !== null && user !== null) {
+            this.setState({
+                favoriteMovies: favoriteMovies.filter((movie) => movie !== movieId),
+            });
+            axios
+                .delete(
+                    `https://davemoviebase.herokuapp.com/users/${user}/movies/${movieId}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                )
+                .then(() => {
+                    console.log(`Movie successfully removed from favorites!`);
+                })
+                .catch((e) => {
+                    console.error(e);
+                });
+        }
+    }
+
     onLoggedOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
@@ -75,7 +129,7 @@ export class MainView extends React.Component {
 
 
     render() {
-        const { movies, user, Username, username, UserUpdate, favMovies } = this.state;
+        const { movies, user, favoriteMovies } = this.state;
 
         return (
             <Router>
@@ -126,7 +180,8 @@ export class MainView extends React.Component {
                                     />;
                                 return (<Col md={8}>
                                     <MovieView
-                                        movie={movies.find(m => m._id === match.params.movieId)}
+                                        movie={movies.find((m) => m._id === match.params.movieId)}
+                                        addFavorite={this.addFavorite.bind(this)}
                                         onBackClick={() => history.goBack()}
 
                                     />
@@ -182,53 +237,23 @@ export class MainView extends React.Component {
                                     <Redirect to="/" />
                                 </Col>
 
+                                if (movies.length === 0) return <div className="main-view" />;
+
+                                if (!user) return <Redirect to="/" />;
                                 return (
                                     <Col>
                                         <ProfileView
-                                            movies={movies}
+                                            favoriteMovies={favoriteMovies.map((movieId) => {
+                                                return movies.find((m) => m._id === movieId);
+                                            })}
                                             user={user}
+                                            removeFavorite={this.removeFavorite.bind(this)}
                                             onBackClick={() => history.goBack()}
                                         />
                                     </Col>
                                 );
                             }}
                         />
-
-                        {/*    <Route
-                            path="/users-update/:Username"
-                            render={({ match, history }) => {
-                                if (!user) return
-                                <Redirect to="/" />;
-                                return (
-                                    <Col>
-                                        <ProfileView
-                                            user={user}
-                                            movies={movies}
-                                            onBackClick={() => history.goBack()}
-                                            handleFavorite={this.handleFavorite}
-                                        />
-                                    </Col>
-                                );
-                            }}
-                        /> */}
-
-                        {/*   <Route
-                            path="/users/:Username/movies/:MovieID"
-                            render={({ match, history }) => {
-                                if (!user) return
-                                <Redirect to="/" />;
-                                return (
-                                    <Col>
-                                        <ProfileView
-                                            movies={movies}
-                                            user={user}
-                                            onBackClick={() => history.goBack()}
-                                            favMovies={favMovies}
-                                        />
-                                    </Col>
-                                );
-                            }}
-                        /> */}
 
                     </Row>
                 </Container>

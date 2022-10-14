@@ -12,7 +12,7 @@ export class MovieView extends React.Component {
 
 
     render() {
-        const { movie, onBackClick, handleChange, checked } = this.props;
+        const { movie, onBackClick, addFavorite } = this.props;
 
         return (
             <Row>
@@ -45,8 +45,15 @@ export class MovieView extends React.Component {
                             </Card.Text>
 
                             <Button onClick={() => { onBackClick(null); }}>Back</Button>
-                            <Button>Add to favorites</Button>
-
+                            <Button
+                                className="button-movie-view-add-favorite"
+                                variant="outline-warning"
+                                size="sm"
+                                type="button"
+                                onClick={() => addFavorite(movie._id)}
+                            >
+                                Add to favorites
+                            </Button>
 
                         </Card.Body>
                     </Card >
@@ -56,3 +63,22 @@ export class MovieView extends React.Component {
         );
     }
 }
+MovieView.propTypes = {
+    movie: PropTypes.shape({
+        Title: PropTypes.string.isRequired,
+        Description: PropTypes.string.isRequired,
+        ImagePath: PropTypes.string.isRequired,
+        Genre: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Description: PropTypes.string.isRequired,
+        }).isRequired,
+        Actors: PropTypes.array.isRequired,
+        Director: PropTypes.shape({
+            Name: PropTypes.string.isRequired,
+            Bio: PropTypes.string.isRequired,
+            Birth: PropTypes.string.isRequired,
+            Death: PropTypes.string.isRequired,
+        }).isRequired,
+    }).isRequired,
+    onBackClick: PropTypes.func.isRequired,
+};
