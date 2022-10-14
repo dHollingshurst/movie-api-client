@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
+import { Form, ToggleButton, Button, Switch, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
+import Switch from "react-switch";
 import './movie-view.scss';
-import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link, Switch } from 'react-router-dom';
+
 
 
 export class MovieView extends React.Component {
 
 
+
     render() {
-        const { movie, onBackClick, handleFavorite, favMovies, isFavorite } = this.props;
+        const { movie, onBackClick, handleChange, checked } = this.props;
 
         return (
             <Row>
@@ -42,8 +45,9 @@ export class MovieView extends React.Component {
                             </Card.Text>
 
                             <Button onClick={() => { onBackClick(null); }}>Back</Button>
+                            <Button>Add to favorites</Button>
 
-                            <Button onClick={() => { handleFavorite(movie._id, 'add'); }}>Add to favorites</Button>
+
                         </Card.Body>
                     </Card >
 

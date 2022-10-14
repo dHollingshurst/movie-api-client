@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import { FavCard } from '../fav-card/fav-card';
 
 
 export function ProfileView(props) {
-    const [name, setName] = useState('');
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -17,21 +17,17 @@ export function ProfileView(props) {
 
     // declare hook for each input
     const [values, setValues] = useState({
-        nameErr: '',
+
         usernameErr: '',
         passwordErr: '',
         emailErr: '',
     });
 
-    let favMovies = [];
 
 
     const validate = () => {
         let isReq = true;
-        if (!name) {
-            setValues({ ...values, nameErr: 'Name is required' });
-            isReq = false;
-        }
+
         if (!username) {
             setValues({ ...values, usernameErr: 'Username Required' });
             isReq = false;
@@ -75,19 +71,22 @@ export function ProfileView(props) {
             });
     }
 
+    useEffect(() => {
+        getUser(localStorage.getItem('token'));
+    }, []);
+
     const updateAccount = (e) => {
         e.preventDefault();
-        const Username = localStorage.getItem("user");
+        const username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
         const isReq = validate();
         if (isReq) {
-            axios.put(`https://davemoviebase.herokuapp.com/users/${Username}`,
+            axios.put(`https://davemoviebase.herokuapp.com/users/${username}`,
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 },
                 {
                     Username: username,
-                    Name: name,
                     Password: password,
                     Email: email,
                     Birthday: birthday
@@ -95,7 +94,6 @@ export function ProfileView(props) {
                 .then((response) => {
                     this.setState({
                         Username: response.data.Username,
-                        Name: response.data.Name,
                         Password: response.data.Password,
                         Email: response.data.Email,
                         Birthday: response.data.Birthday
@@ -151,13 +149,6 @@ export function ProfileView(props) {
                             {values.usernameErr && <p>{values.usernameErr}</p>}
                         </Form.Group>
 
-                        <Form.Group controlId="formName" className="reg-form-inputs">
-                            <Form.Label>Name:</Form.Label>
-                            <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
-                            {values.nameErr && <p>{values.nameErr}</p>}
-                        </Form.Group>
-
-
                         <Form.Group controlId="formPassword" className="reg-form-inputs">
                             <Form.Label>PassWord: </Form.Label>
                             <Form.Control
@@ -190,29 +181,13 @@ export function ProfileView(props) {
                     <h2>Favourite movies</h2>
                 </Col>
             </Row>
-            {favMovies.length !== 0 ? (
-                <Row className="justify-content-center mt-3">
-                    {favMovies.map((movieId) => {
-                        let movie = movies.find((m) => m._id === movieId);
-                        return (
-                            <FavCard
-                                key={movieId}
-                                movie={movie}
-                                handleFavorite={handleFavorite}
-                            >
-                                {movie.title}
-                                <Button onClick={() => { handleFavorite(movie._id, 'remove'); }}>Add to favorites</Button>
-                            </FavCard>
-                        );
-                    })}
+            {/*   if ({favMovies}) {
+                <Row>
+                    <FavCard>
+
+                    </FavCard>
                 </Row>
-            ) : (
-                <h2 className="subtitle">
-
-                    You don't have movies in your favorite movies list.
-
-                </h2>
-            )}
+            } */}
         </div>
 
     );

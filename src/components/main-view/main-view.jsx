@@ -26,7 +26,7 @@ export class MainView extends React.Component {
         this.state = {
             movies: [],
             user: null,
-            favMovies: [],
+
         };
     }
 
@@ -72,44 +72,6 @@ export class MainView extends React.Component {
             user: null
         });
     }
-
-    handleFavorite = (movieId, action) => {
-        const { user, favMovies } = this.state;
-        const Username = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
-        if (token !== null && user !== null) {
-            if (action === 'add') {
-                this.setState({ favMovies: [...favMovies, movieId] });
-                axios.post(`https://davemoviebase.herokuapp.com/users/${Username}/movies/${movieId}`,
-                    {},
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                )
-                    .then((res) => {
-                        console.log('Movie added to favorites');
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            } else if (action === 'remove') {
-                this.setState({
-                    favMovies: favMovies.filter((id) => id !== movieId),
-                });
-                axios.delete(`https://davemoviebase.herokuapp.com/users/${Username}/movies/${movieId}`,
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                )
-                    .then((res) => {
-                        console.log('Movie removied from favorites');
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    });
-            }
-        }
-    };
 
 
     render() {
@@ -166,7 +128,7 @@ export class MainView extends React.Component {
                                     <MovieView
                                         movie={movies.find(m => m._id === match.params.movieId)}
                                         onBackClick={() => history.goBack()}
-                                        handleFavorite={this.handleFavorite}
+
                                     />
                                 </Col>);
                             }} />
@@ -226,8 +188,6 @@ export class MainView extends React.Component {
                                             movies={movies}
                                             user={user}
                                             onBackClick={() => history.goBack()}
-                                            favMovies={favMovies || []}
-                                            handleFavorite={this.handleFavorite}
                                         />
                                     </Col>
                                 );
@@ -252,7 +212,7 @@ export class MainView extends React.Component {
                             }}
                         /> */}
 
-                        <Route
+                        {/*   <Route
                             path="/users/:Username/movies/:MovieID"
                             render={({ match, history }) => {
                                 if (!user) return
@@ -268,7 +228,7 @@ export class MainView extends React.Component {
                                     </Col>
                                 );
                             }}
-                        />
+                        /> */}
 
                     </Row>
                 </Container>

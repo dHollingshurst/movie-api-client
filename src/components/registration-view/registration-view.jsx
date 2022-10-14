@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from
 
 
 export function RegistrationView(props) {
-    const [name, setName] = useState('');
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ export function RegistrationView(props) {
 
     // declare hook for each input
     const [values, setValues] = useState({
-        nameErr: '',
+
         usernameErr: '',
         passwordErr: '',
         emailErr: '',
@@ -23,10 +23,7 @@ export function RegistrationView(props) {
     // validate user inputs
     const validate = () => {
         let isReq = true;
-        if (!name) {
-            setValues({ ...values, nameErr: 'Name is required' });
-            isReq = false;
-        }
+
         if (!username) {
             setValues({ ...values, usernameErr: 'Username Required' });
             isReq = false;
@@ -59,7 +56,6 @@ export function RegistrationView(props) {
         const isReq = validate();
         if (isReq) {
             axios.post('https://davemoviebase.herokuapp.com/users', {
-                Name: name,
                 Username: username,
                 Password: password,
                 Email: email,
@@ -91,12 +87,6 @@ export function RegistrationView(props) {
                             onChange={e => setUsername(e.target.value)}
                             placeholder="Enter username" />
                         {values.usernameErr && <p>{values.usernameErr}</p>}
-                    </Form.Group>
-
-                    <Form.Group controlId="formName" className="reg-form-inputs">
-                        <Form.Label>Name:</Form.Label>
-                        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
-                        {values.nameErr && <p>{values.nameErr}</p>}
                     </Form.Group>
 
 
@@ -131,7 +121,6 @@ export function RegistrationView(props) {
 
 RegistrationView.PropTypes = {
     register: PropTypes.shape({
-        Name: PropTypes.string.isRequired,
         Username: PropTypes.string.isRequired,
         Password: PropTypes.string.isRequired,
         Email: PropTypes.string.isRequired
