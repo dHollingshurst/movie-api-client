@@ -12,13 +12,14 @@ export function ProfileView(props) {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
+    const [favouriteMovies, setFavouriteMovies] = useState('');
     // Declare hook for each input
     const [usernameErr, setUsernameErr] = useState('');
     const [passwordErr, setPasswordErr] = useState('');
     const [emailErr, setEmailErr] = useState('');
     const [birthdayErr, setBirthdayErr] = useState('');
-    const { user, FavouriteMovies, removeFavourite, onBackClick } = props;
 
+    const { user, removeFavourite, onBackClick, movies } = props;
 
 
     const validate = () => {
@@ -50,26 +51,36 @@ export function ProfileView(props) {
     }
     getUser = (token) => {
         const Username = localStorage.getItem('user');
-        axios.get(`https://davemoviebase.herokuapp/users/${Username}`, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+        axios
+            .get(`https://davemoviebase.herokuapp/users/${Username}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
             .then((response) => {
-                this.setState({
-                    Username: response.data.Username,
-                    Password: response.data.Password,
-                    Email: response.data.Email,
-                    Birthday: response.data.Birthday,
-                    FavouriteMovies: response.data.FavouriteMovies
-                });
+                // this.setState({
+                //   Username: response.data.Username,
+                //   Password: response.data.Password,
+                //   Email: response.data.Email,
+                //   Birthday: response.data.Birthday,
+                //   FavouriteMovies: response.data.FavouriteMovies,
+                // });
+                setUsername(response.data.Username);
+                setPassword(response.data.Password);
+                setEmail(response.data.Email);
+                setBirthday(response.data.Birthday);
+                setFavouriteMovies(response.data.FavouriteMovies);
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }
+    };
 
     useEffect(() => {
         getUser(localStorage.getItem('token'));
     }, []);
+
+    const favouriteMoviesList = movies.filter((m) => {
+        return favouriteMovies.includes(m._id);
+    });
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -226,9 +237,9 @@ export function ProfileView(props) {
                             </Col>
                         </Card>
                     </CardGroup>
-                    <h3>favourite Movies</h3>
+                    <h3>Favourite Movies</h3>
                     <CardGroup>
-                        {FavouriteMovies.map((m) => (
+                        {favouriteMoviesList.map((m) => (
                             <Col
                                 md={6}
                                 lg={3}
@@ -236,7 +247,7 @@ export function ProfileView(props) {
 
                             >
                                 <Card>
-                                    <Link
+                                    {/*    <Link
                                         to={`/movies/${m._id}`}
                                         className="profile-movie-card-link"
                                     >
@@ -248,7 +259,7 @@ export function ProfileView(props) {
                                         <Card.Body>
                                             <Card.Title>{m.Title}</Card.Title>
                                         </Card.Body>
-                                    </Link>
+                                    </Link> */}
                                     <Button
                                         size="sm"
                                         type="button"
@@ -277,6 +288,6 @@ export function ProfileView(props) {
     );
 }
 
-ProfileView.propTypes = {
-    FavouriteMovies: PropTypes.array.isRequired,
-};
+/* ProfileView.propTypes = {
+    favouriteMovies: PropTypes.array.isRequired,
+}; */
