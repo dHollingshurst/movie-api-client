@@ -26,7 +26,7 @@ export class MainView extends React.Component {
         this.state = {
             movies: [],
             user: null,
-            favoriteMovies: [],
+            FavouriteMovies: [],
 
         };
     }
@@ -66,15 +66,33 @@ export class MainView extends React.Component {
             });
     }
 
-    addFavorite(movieId) {
-        const { user, favoriteMovies } = this.state;
+    getFavourites(token) {
+        axios.get(`https://davemoviebase.herokuapp.com/users/${user}/movies/${movieId}`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }).then(response => {
+                console.log(FavouriteMovies)
+                this.setState({
+                    FavouriteMovies: response.data
+
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    addFavourite(movieId) {
+        const { user, FavouriteMovies } = this.state;
         const token = localStorage.getItem('token');
-        if (favoriteMovies.some((favId) => favId === movieId)) {
-            console.log('Movie already added to favorites!');
+        if (FavouriteMovies.some((favId) => favId === movieId)) {
+            console.log('Movie already added to Favourites!');
         } else {
             if (token !== null && user !== null) {
                 this.setState({
-                    favoriteMovies: [...favoriteMovies, movieId],
+                    FavouriteMovies: [...FavouriteMovies, movieId],
                 });
                 axios
                     .post(
@@ -87,7 +105,7 @@ export class MainView extends React.Component {
                         }
                     )
                     .then((res) => {
-                        console.log(`Movie successfully added to favorites!`);
+                        console.log(`Movie successfully added to Favourites!`);
                     })
                     .catch((e) => {
                         console.error(e);
@@ -96,12 +114,12 @@ export class MainView extends React.Component {
         }
     }
 
-    removeFavorite(movieId) {
-        const { user, favoriteMovies } = this.state;
+    removeFavourite(movieId) {
+        const { user, FavouriteMovies } = this.state;
         const token = localStorage.getItem('token');
         if (token !== null && user !== null) {
             this.setState({
-                favoriteMovies: favoriteMovies.filter((movie) => movie !== movieId),
+                FavouriteMovies: FavouriteMovies.filter((movie) => movie !== movieId),
             });
             axios
                 .delete(
@@ -111,7 +129,7 @@ export class MainView extends React.Component {
                     }
                 )
                 .then(() => {
-                    console.log(`Movie successfully removed from favorites!`);
+                    console.log(`Movie successfully removed from Favourites!`);
                 })
                 .catch((e) => {
                     console.error(e);
@@ -129,8 +147,8 @@ export class MainView extends React.Component {
 
 
     render() {
-        const { movies, user, favoriteMovies } = this.state;
-        console.log(favoriteMovies);
+        const { movies, user, FavouriteMovies } = this.state;
+        console.log(FavouriteMovies);
 
         return (
             <Router>
@@ -182,7 +200,7 @@ export class MainView extends React.Component {
                                 return (<Col md={8}>
                                     <MovieView
                                         movie={movies.find((m) => m._id === match.params.movieId)}
-                                        addFavorite={this.addFavorite.bind(this)}
+                                        addFavourite={this.addFavourite.bind(this)}
                                         onBackClick={() => history.goBack()}
 
                                     />
@@ -244,11 +262,11 @@ export class MainView extends React.Component {
                                 return (
                                     <Col>
                                         <ProfileView
-                                            favoriteMovies={favoriteMovies.map((movieId) => {
+                                            FavouriteMovies={FavouriteMovies.map((movieId) => {
                                                 return movies.find((m) => m._id === movieId);
                                             })}
                                             user={user}
-                                            removeFavorite={this.removeFavorite.bind(this)}
+                                            removeFavourite={this.removeFavourite.bind(this)}
                                             onBackClick={() => history.goBack()}
                                         />
                                     </Col>

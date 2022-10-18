@@ -17,7 +17,7 @@ export function ProfileView(props) {
     const [passwordErr, setPasswordErr] = useState('');
     const [emailErr, setEmailErr] = useState('');
     const [birthdayErr, setBirthdayErr] = useState('');
-    const { user, favoriteMovies, removeFavorite, onBackClick } = props;
+    const { user, FavouriteMovies, removeFavourite, onBackClick } = props;
 
 
 
@@ -48,29 +48,29 @@ export function ProfileView(props) {
 
         return isReq;
     }
-
-    /*     getUser = (token) => {
-            const Username = localStorage.getItem('user');
-            axios.get(`https://davemoviebase.herokuapp/users/${Username}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-                .then((response) => {
-                    this.setState({
-                        Username: response.data.Username,
-                        Password: response.data.Password,
-                        Email: response.data.Email,
-                        Birthday: response.data.Birthday
-                    });
-                })
-                .catch(function (error) {
-                    console.log(error);
+    getUser = (token) => {
+        const Username = localStorage.getItem('user');
+        axios.get(`https://davemoviebase.herokuapp/users/${Username}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then((response) => {
+                this.setState({
+                    Username: response.data.Username,
+                    Password: response.data.Password,
+                    Email: response.data.Email,
+                    Birthday: response.data.Birthday,
+                    FavouriteMovies: response.data.FavouriteMovies
                 });
-        }
-    
-        useEffect(() => {
-            getUser(localStorage.getItem('token'));
-        }, []);
-     */
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        getUser(localStorage.getItem('token'));
+    }, []);
+
     const handleUpdate = (e) => {
         e.preventDefault();
         const isReq = validate();
@@ -226,9 +226,9 @@ export function ProfileView(props) {
                             </Col>
                         </Card>
                     </CardGroup>
-                    <h3>Favorite Movies</h3>
+                    <h3>favourite Movies</h3>
                     <CardGroup>
-                        {favoriteMovies.map((m) => (
+                        {FavouriteMovies.map((m) => (
                             <Col
                                 md={6}
                                 lg={3}
@@ -240,11 +240,11 @@ export function ProfileView(props) {
                                         to={`/movies/${m._id}`}
                                         className="profile-movie-card-link"
                                     >
-                                        {/* <Card.Img
+                                        {<Card.Img
                                             variant="top"
                                             crossOrigin="anonymous | use-credentials"
                                             src={m.ImagePath}
-                                        /> */}
+                                        />}
                                         <Card.Body>
                                             <Card.Title>{m.Title}</Card.Title>
                                         </Card.Body>
@@ -252,7 +252,7 @@ export function ProfileView(props) {
                                     <Button
                                         size="sm"
                                         type="button"
-                                        onClick={() => removeFavorite(m._id)}
+                                        onClick={() => removeFavourite(m._id)}
                                     >
                                         Remove
                                     </Button>
@@ -278,5 +278,5 @@ export function ProfileView(props) {
 }
 
 ProfileView.propTypes = {
-    favoriteMovies: PropTypes.array.isRequired,
+    FavouriteMovies: PropTypes.array.isRequired,
 };
