@@ -247,7 +247,7 @@ export function ProfileView(props) {
 
                             >
                                 <Card>
-                                    {/*    <Link
+                                    {<Link
                                         to={`/movies/${m._id}`}
                                         className="profile-movie-card-link"
                                     >
@@ -259,7 +259,7 @@ export function ProfileView(props) {
                                         <Card.Body>
                                             <Card.Title>{m.Title}</Card.Title>
                                         </Card.Body>
-                                    </Link> */}
+                                    </Link>}
                                     <Button
                                         size="sm"
                                         type="button"
