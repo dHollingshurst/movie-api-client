@@ -128,8 +128,11 @@ export class MainView extends React.Component {
                         headers: { Authorization: `Bearer ${token}` },
                     }
                 )
-                .then(() => {
+                .then(response => {
                     console.log(`Movie successfully removed from Favourites!`);
+                    this.setState({
+                        favouriteMovies: response.data.FavouriteMovies
+                    });
                 })
                 .catch((e) => {
                     console.error(e);

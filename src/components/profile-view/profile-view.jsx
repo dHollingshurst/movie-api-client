@@ -4,6 +4,9 @@ import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
 import { render } from "react-dom";
+import CardHeader from "react-bootstrap/esm/CardHeader";
+
+
 
 
 export function ProfileView(props) {
@@ -20,6 +23,8 @@ export function ProfileView(props) {
     const [birthdayErr, setBirthdayErr] = useState('');
 
     const { user, removeFavourite, onBackClick, movies } = props;
+
+
 
 
     const validate = () => {
@@ -144,16 +149,13 @@ export function ProfileView(props) {
 
     return (
         <Container className="profile-container">
-            <Card>
-                <Card.Header className="text-center" as="h5">
-                    Profile
-                </Card.Header>
-                <Card.Body>
-                    <CardGroup>
-                        <Card>
-                            <span className="label text-center headline-profile-update">
-                                Update profile information
-                            </span>
+            <Row>
+                <Col></Col>
+                <Col xs={12} md={6} sm={8}>
+
+                    <Card>
+                        <Card.Body>
+                            <h2>Update user information</h2>
                             <Form>
                                 <Form.Group
                                     className="profile-form-group-username"
@@ -207,46 +209,58 @@ export function ProfileView(props) {
                                     Update
                                 </Button>
                             </Form>
-                        </Card>
-                        <Card>
-                            <span className="label text-center headline-profile-delete">
-                                Delete account
-                            </span>
-                            <Col>
-                                <Button
+                        </Card.Body>
 
-                                    variant="danger"
-                                    type="submit"
-                                    onClick={handleDelete}
-                                >
-                                    DELETE ACCOUNT PERMANENTLY
-                                </Button>
-                            </Col>
-                        </Card>
-                    </CardGroup>
-                    <h3>Favourite Movies</h3>
-                    <CardGroup>
-                        {favouriteMoviesList.map((m) => (
-                            <Col
-                                md={6}
-                                lg={3}
-                                key={m._id}
+                    </Card>
 
+                </Col>
+                <Col></Col>
+            </Row>
+
+            <Row>
+                <Col></Col>
+                <Col xs={12} md={6} sm={8}>
+                    <Card>
+                        <Card.Body>
+                            <h2>Unregister</h2>
+                            <Button
+
+                                variant="danger"
+                                type="submit"
+                                onClick={handleDelete}
                             >
-                                <Card>
-                                    {<Link
-                                        to={`/movies/${m._id}`}
-                                        className="profile-movie-card-link"
-                                    >
-                                        {<Card.Img
-                                            variant="top"
-                                            crossOrigin="anonymous | use-credentials"
-                                            src={m.ImagePath}
-                                        />}
-                                        <Card.Body>
-                                            <Card.Title>{m.Title}</Card.Title>
-                                        </Card.Body>
-                                    </Link>}
+                                Unregister
+                            </Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col></Col>
+            </Row>
+
+
+
+            <h3>Favourite Movies</h3>
+
+            <CardGroup>
+                {favouriteMoviesList.map((m) => (
+                    <Col
+                        md={6}
+                        lg={3}
+                        key={m._id}
+
+                    >
+                        <Card>
+                            {<Link
+                                to={`/movies/${m._id}`}
+                                className="profile-movie-card-link"
+                            >
+                                {<Card.Img
+                                    variant="top"
+                                    crossOrigin="anonymous | use-credentials"
+                                    src={m.ImagePath}
+                                />}
+                                <Card.Body>
+                                    <Card.Title>{m.Title}</Card.Title>
                                     <Button
                                         size="sm"
                                         type="button"
@@ -254,23 +268,23 @@ export function ProfileView(props) {
                                     >
                                         Remove
                                     </Button>
-                                </Card>
-                            </Col>
-                        ))}
-                    </CardGroup>
-                </Card.Body>
-                <Card.Footer>
-                    <Button
+                                </Card.Body>
+                            </Link>}
 
-                        variant="secondary"
-                        onClick={() => {
-                            onBackClick();
-                        }}
-                    >
-                        Back
-                    </Button>
-                </Card.Footer>
-            </Card>
+                        </Card>
+                    </Col>
+                ))}
+            </CardGroup>
+            <Button
+
+                variant="secondary"
+                onClick={() => {
+                    onBackClick();
+                }}
+            >
+                Back
+            </Button>
+
         </Container>
     );
 }
