@@ -69,7 +69,7 @@ export function ProfileView(props) {
                 //   FavouriteMovies: response.data.FavouriteMovies,
                 // });
                 setUsername(response.data.Username);
-                setPassword(response.data.Password);
+                //setPassword(response.data.Password);
                 setEmail(response.data.Email);
                 setBirthday(response.data.Birthday);
                 setFavouriteMovies(response.data.FavouriteMovies);
@@ -180,8 +180,8 @@ export function ProfileView(props) {
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        placeholder="Your password must be 6 or more characters"
-                                        minLength="6"
+                                        //placeholder="Your password must be 8 or more characters"
+                                        minLength="8"
                                         required
                                     />
                                     {passwordErr && <p>{passwordErr}</p>}
@@ -261,15 +261,15 @@ export function ProfileView(props) {
                                 />}
                                 <Card.Body>
                                     <Card.Title>{m.Title}</Card.Title>
-                                    <Button
-                                        size="sm"
-                                        type="button"
-                                        onClick={() => removeFavourite(m._id)}
-                                    >
-                                        Remove
-                                    </Button>
                                 </Card.Body>
                             </Link>}
+                            <Button
+                                size="sm"
+                                type="button"
+                                onClick={() => removeFavourite(m._id)}
+                            >
+                                Remove
+                            </Button>
 
                         </Card>
                     </Col>
