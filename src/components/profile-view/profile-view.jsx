@@ -52,7 +52,7 @@ export function ProfileView(props) {
     getUser = (token) => {
         const Username = localStorage.getItem('user');
         axios
-            .get(`https://davemoviebase.herokuapp/users/${Username}`, {
+            .get(`https://davemoviebase.herokuapp.com/users/${Username}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
@@ -197,19 +197,6 @@ export function ProfileView(props) {
                                         required
                                     />
                                     {emailErr && <p>{emailErr}</p>}
-                                </Form.Group>
-                                <Form.Group
-                                    className="profile-form-group-birthday"
-                                    controlId="formGroupBirthday"
-                                >
-                                    <Form.Label>Date of birth:</Form.Label>
-                                    <Form.Control
-                                        type="date"
-                                        value={birthday}
-                                        onChange={(e) => setBirthday(e.target.value)}
-                                        placeholder="Enter your birthday"
-                                    />
-                                    {birthdayErr && <p>{birthdayErr}</p>}
                                 </Form.Group>
                                 <Button
                                     className="button-profile-view-update"
