@@ -131,8 +131,10 @@ export class MainView extends React.Component {
                 .then(response => {
                     console.log(`Movie successfully removed from Favourites!`);
                     this.setState({
-                        favouriteMovies: response.data.FavouriteMovies
+                        favouriteMovies: response.data.FavouriteMovies,
+
                     });
+                    window.open(`/users/${user}`, "_self");
                 })
                 .catch((e) => {
                     console.error(e);

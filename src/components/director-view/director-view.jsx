@@ -5,8 +5,10 @@ export class DirectorView extends React.Component {
 
     render() {
 
-        const { movie, movies, onBackClick, directors, director, directorMovies, MovieCard } = this.props;
-
+        const selectDirector = () => {
+            const { name } = useParams();
+            return movies.find((m) => m.Director.Name === name);
+        }
         return (
             <Row className="justify-content-center mt-3">
                 <Col xs={12}>
@@ -24,7 +26,7 @@ export class DirectorView extends React.Component {
                                 {director.Birth}
                             </Card.Text>
 
-                            {/*   <Card.Text>
+                            <Card.Text>
                                 <Row
                                     className="justify-content-center mt-3">
                                     {directorMovies.map((movie) => (
@@ -35,7 +37,7 @@ export class DirectorView extends React.Component {
                                         </MovieCard>
                                     ))}
                                 </Row>
-                            </Card.Text> */}
+                            </Card.Text>
 
                             <Button
                                 onClick={() => { onBackClick(null); }}>
