@@ -2,11 +2,6 @@ $color: white;
 $cardColor: whitesmoke;
 
 
-.movieCard {
-    display: flex;
-
-}
-
 .movieImg {
     background-color: $cardColor;
 }
@@ -17,4 +12,5 @@ $cardColor: whitesmoke;
 
 .card-body {
     background-color: $cardColor;
+
 }

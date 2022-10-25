@@ -1,10 +1,21 @@
 $color: white;
 $cardColor: whitesmoke;
 
+/* .movie-view-card {
+
+}*/
+
 .movie-poster {
     background-color: $cardColor;
 }
 
 .poster-img {
     background-color: $cardColor
+}
+
+
+
+.back-button {
+    margin: 20px;
+    background-color: black;
 }

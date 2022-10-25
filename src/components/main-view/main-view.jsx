@@ -175,7 +175,7 @@ export class MainView extends React.Component {
                                 if (movies.length === 0) return <div className="main-view" />
 
                                 return movies.map(m => (
-                                    <Col md={3} key={m._id}>
+                                    <Col md={3} key={m._id} className="movie-card">
                                         <MovieCard movie={m} />
                                     </Col>
                                 ))
@@ -222,16 +222,13 @@ export class MainView extends React.Component {
                                     />
                                 </Col>
                                 if (movies.length === 0)
-                                    return
-                                <div className="main-view" />;
-                                return <Col md={8}>
+                                    return <div className="main-view" />;
+                                return (<Col md={8}>
                                     <DirectorView
-                                        director={movies.find(m => m.Director.Name === match.params.Name).Director
-                                        }
-                                        directorMovies={movies.filter(
-                                            (m) => m.Director.Name === match.params.Name
-                                        )} onBackClick={() => history.goBack()} />
-                                </Col>
+                                        director={movies.find(m => m.Director.Name === match.params.Name).Director}
+                                        onBackClick={() => history.goBack()}
+                                    />
+                                </Col>);
                             }} />
 
                         <Route

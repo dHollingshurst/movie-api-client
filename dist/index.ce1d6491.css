@@ -1,9 +1,5 @@
 .my-flix {
-  color: #fff;
-}
-
-.movieCard {
-  display: flex;
+  color: #f5f5f5;
 }
 
 .movieImg, .main-card, .card-body {
@@ -12,6 +8,11 @@
 
 .movie-poster, .poster-img {
   background-color: #f5f5f5;
+}
+
+.back-button {
+  background-color: #000;
+  margin: 20px;
 }
 
 .app-container, html {

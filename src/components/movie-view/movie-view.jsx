@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Form, ToggleButton, Button, Switch, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
+import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
 import Switch from "react-switch";
 import './movie-view.scss';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link, Switch } from 'react-router-dom';
@@ -17,7 +17,7 @@ export class MovieView extends React.Component {
         return (
             <Row>
                 <Col xs={12}>
-                    <Card>
+                    <Card className="movie-view-card">
                         <Card.Img className="poster-img" variant="top" src="movie.ImagePath" />
                         <Card.Body className="movie-poster">
                             <Card.Title>
@@ -36,16 +36,21 @@ export class MovieView extends React.Component {
 
                             <Card.Text>
                                 <Link to={`/directors/${movie.Director.Name}`}>
-                                    <Button variant="link">Director</Button>
+                                    <Button variant="dark">Director</Button>
                                 </Link>
                             </Card.Text>
 
-                            <Card.Text>
-                                Actors: {movie.Actors}
-                            </Card.Text>
-
-                            <Button onClick={() => { onBackClick(null); }}>Back</Button>
                             <Button
+                                variant="dark"
+                                className="back-button"
+                                onClick={() => { onBackClick(null); }}
+                            >
+                                Back
+                            </Button>
+
+                            <Button
+                                variant="dark"
+                                className="fav-button"
                                 type="button"
                                 onClick={() => addFavourite(movie._id)}
                             >
@@ -74,7 +79,7 @@ MovieView.propTypes = {
             Name: PropTypes.string.isRequired,
             Bio: PropTypes.string.isRequired,
             Birth: PropTypes.string.isRequired,
-            Death: PropTypes.string.isRequired,
+            Death: PropTypes.string,
         }).isRequired,
     }).isRequired,
     onBackClick: PropTypes.func.isRequired,

@@ -1,14 +1,13 @@
 import React from 'react';
-import { Navbar, Container, Nav, Button, Row, Col, Card } from 'react-bootstrap';
+import { CardGroup, Button, Card, Col, Row, Card } from 'react-bootstrap';
 
+import { Link } from 'react-router-dom';
+
+// import './director-view.scss';
 export class DirectorView extends React.Component {
-
     render() {
+        const { movies, director, onBackClick } = this.props;
 
-        const selectDirector = () => {
-            const { name } = useParams();
-            return movies.find((m) => m.Director.Name === name);
-        }
         return (
             <Row className="justify-content-center mt-3">
                 <Col xs={12}>
@@ -17,27 +16,21 @@ export class DirectorView extends React.Component {
                             <Card.Title>
                                 {director.Name}
                             </Card.Title>
-
                             <Card.Text>
-                                {director.Bio} <br />
+                                {director.Bio}
                             </Card.Text>
 
-                            <Card.Text>
-                                {director.Birth}
-                            </Card.Text>
-
-                            <Card.Text>
-                                <Row
-                                    className="justify-content-center mt-3">
+                            {/*     <Card.Text>
+                                <Row className="justify-content-center mt-3">
                                     {directorMovies.map((movie) => (
                                         <MovieCard
-                                            key={movie._id}
+                                            key={movie.id}
                                             movie={movie}>
                                             {movie.Title}
                                         </MovieCard>
                                     ))}
                                 </Row>
-                            </Card.Text>
+                            </Card.Text> */}
 
                             <Button
                                 onClick={() => { onBackClick(null); }}>
