@@ -1,9 +1,7 @@
 import React from 'react';
 import { CardGroup, Button, Card, Col, Row, Card } from 'react-bootstrap';
+import './director-view.scss';
 
-import { Link } from 'react-router-dom';
-
-// import './director-view.scss';
 export class DirectorView extends React.Component {
     render() {
         const { movies, director, onBackClick } = this.props;
@@ -31,12 +29,15 @@ export class DirectorView extends React.Component {
                                     ))}
                                 </Row>
                             </Card.Text> */}
-
+                        </Card.Body>
+                        <Card.Footer>
                             <Button
-                                onClick={() => { onBackClick(null); }}>
+                                className='back-button'
+                                onClick={() => { onBackClick(null); }}
+                            >
                                 Back
                             </Button>
-                        </Card.Body>
+                        </Card.Footer>
                     </Card>
                 </Col>
             </Row>

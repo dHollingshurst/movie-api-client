@@ -2,7 +2,7 @@
 import React from "react";
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
-
+import './navbar.scss';
 
 export function Menubar({ user }) {
 
@@ -24,17 +24,17 @@ export function Menubar({ user }) {
 
     return (
 
-        <Navbar className="main-nav" sticky="top" bg="dark" expand="lg" variant="dark">
+        <Navbar className="main-nav" sticky="top" expand="lg" variant="light">
             <Container>
                 <Navbar.Brand className="navbar-logo" href="/">myFlixCinema</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
                         {isAuth() && (
-                            <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>
+                            <Nav.Link className="profile-link" href={`/users/${user}`}>{user}</Nav.Link>
                         )}
                         {isAuth() && (
-                            <Button variant="link" onClick={onLoggedOut}>Logout</Button>
+                            <Button className="log-out-button" variant="primary" onClick={onLoggedOut}>Logout</Button>
                         )}
                         {!isAuth() && (
                             <Nav.Link href="/">Sign-in</Nav.Link>

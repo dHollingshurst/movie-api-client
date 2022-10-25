@@ -1,15 +1,17 @@
-.profile-movie-card-link {
-    display: flex;
+$cardColor: rgb(62, 167, 184);
+
+.main-nav {
+    background-image: radial-gradient(100% 100% at 100% 0, #cacfd0 0, $cardColor 100%);
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+
 }
 
-.fav-card {
-    display: flex;
+.navbar-logo {
+    font-weight: 500;
+
 }
 
-.update-profile-button,
-.back-button,
-.remove-fav-button,
-.unregister-button {
+.log-out-button {
     margin-right: 10px;
     margin-top: 10px;
     appearance: none;
@@ -39,19 +41,14 @@
     white-space: nowrap;
     will-change: box-shadow, transform;
     font-size: 18px;
+
 }
 
-.back-button:focus,
-.remove-fav-button:focus,
-.unregister-button:focus,
-.update-profile-button:focus {
+.log-out-button:focus {
     box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
 }
 
-.back-button:hover,
-.remove-fav-button:focus,
-.unregister-button:focus,
-.update-profile-button:focus {
+.log-out-button:hover {
     box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
     transform: translateY(-2px);
 }

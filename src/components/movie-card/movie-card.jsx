@@ -10,14 +10,22 @@ export class MovieCard extends React.Component {
 
         return (
             <Card >
-                <Card.Img variant="top" src="movie.ImagePath" />
+                <Card.Img className='movie-img' variant="top" src="movie.ImagePath" />
                 <Card.Body>
                     <Card.Title>{movie.Title}</Card.Title>
-                    {/* <Card.Text>{movie.Description}</Card.Text> */}
-                    <Link to={`/movies/${movie._id}`}>
-                        <Button variant="primary">Open</Button>
-                    </Link>
                 </Card.Body>
+                <Card.Footer className='card-footer'>
+                    <Link to={`/movies/${movie._id}`}>
+                        <Button
+                            className="movie-view-button"
+                            variant="primary"
+                            size="sm"
+
+                        >
+                            Open
+                        </Button>
+                    </Link>
+                </Card.Footer>
             </Card>
         );
     }

@@ -89,6 +89,7 @@ export class MainView extends React.Component {
         const token = localStorage.getItem('token');
         if (favouriteMovies.some((favId) => favId === movieId)) {
             console.log('Movie already added to Favourites!');
+            alert('Movie already added to favourites')
         } else {
             if (token !== null && user !== null) {
                 this.setState({
@@ -106,6 +107,7 @@ export class MainView extends React.Component {
                     )
                     .then((res) => {
                         console.log(`Movie successfully added to Favourites!`);
+                        alert('Movie succesfully added to favourites');
                     })
                     .catch((e) => {
                         console.error(e);
@@ -175,7 +177,7 @@ export class MainView extends React.Component {
                                 if (movies.length === 0) return <div className="main-view" />
 
                                 return movies.map(m => (
-                                    <Col md={3} key={m._id} className="movie-card">
+                                    <Col xs={12} md={6} lg={3} key={m._id} className="movie-card">
                                         <MovieCard movie={m} />
                                     </Col>
                                 ))

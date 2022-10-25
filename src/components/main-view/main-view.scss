@@ -1,10 +1,20 @@
 $color: white;
 $cardColor: whitesmoke;
-
-.main-view {
-    background: $color;
-}
+$backDrop: #e2fcfa;
 
 .movie-card {
     display: flex;
+    margin-top: 15px;
+}
+
+.profile-link {
+    margin-top: 22px;
+}
+
+.app-container,
+html,
+.main-view {
+    background: $backDrop;
+    //background-image: radial-gradient(100% 100% at 100% 0, #cacfd0 0, #051e38 100%);
+
 }

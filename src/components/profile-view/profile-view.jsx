@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from 'react-router-dom';
 import { render } from "react-dom";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import './profile-view.scss';
 
 
 
@@ -201,8 +202,8 @@ export function ProfileView(props) {
                                     {emailErr && <p>{emailErr}</p>}
                                 </Form.Group>
                                 <Button
-                                    className="button-profile-view-update"
-                                    variant="secondary"
+                                    className="update-profile-button"
+
                                     type="submit"
                                     onClick={handleUpdate}
                                 >
@@ -225,7 +226,7 @@ export function ProfileView(props) {
                             <h2>Unregister</h2>
                             <Button
 
-                                variant="danger"
+                                className="unregister-button"
                                 type="submit"
                                 onClick={handleDelete}
                             >
@@ -244,6 +245,7 @@ export function ProfileView(props) {
             <CardGroup>
                 {favouriteMoviesList.map((m) => (
                     <Col
+                        xs={12}
                         md={6}
                         lg={3}
                         key={m._id}
@@ -254,16 +256,17 @@ export function ProfileView(props) {
                                 to={`/movies/${m._id}`}
                                 className="profile-movie-card-link"
                             >
-                                {<Card.Img
+                                <Card.Img
                                     variant="top"
-                                    crossOrigin="anonymous | use-credentials"
                                     src={m.ImagePath}
-                                />}
-                                <Card.Body>
-                                    <Card.Title>{m.Title}</Card.Title>
-                                </Card.Body>
+                                />
                             </Link>}
+                            <Card.Body>
+                                <Card.Title>{m.Title}</Card.Title>
+                            </Card.Body>
+
                             <Button
+                                className="remove-fav-button"
                                 size="sm"
                                 type="button"
                                 onClick={() => removeFavourite(m._id)}
@@ -276,7 +279,7 @@ export function ProfileView(props) {
                 ))}
             </CardGroup>
             <Button
-
+                className="back-button"
                 variant="secondary"
                 onClick={() => {
                     onBackClick();

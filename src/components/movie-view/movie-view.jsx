@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import Switch from "react-switch";
 import './movie-view.scss';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link, Switch } from 'react-router-dom';
@@ -16,55 +16,65 @@ export class MovieView extends React.Component {
 
         return (
             <Row>
-                <Col xs={12}>
-                    <Card className="movie-view-card">
+                <Col className="movie-view-card" xs={12}>
+                    <Card
+
+
+                    >
                         <Card.Img className="poster-img" variant="top" src="movie.ImagePath" />
-                        <Card.Body className="movie-poster">
+                        <Card.Body
+                            className="movie-poster">
                             <Card.Title>
                                 {movie.Title}
                             </Card.Title>
-                            <Card.Text>
+                            <Card.Text className="description-text">
                                 Synopsis: {movie.Description} <br />
                                 <br />
                             </Card.Text>
-
-                            <Card.Text>
-                                <Link to={`/genres/${movie.Genre.Name}`}>
-                                    <Button variant="link">Genre</Button>
-                                </Link>
-                            </Card.Text>
-
-                            <Card.Text>
-                                <Link to={`/directors/${movie.Director.Name}`}>
-                                    <Button variant="dark">Director</Button>
-                                </Link>
-                            </Card.Text>
-
-                            <Button
-                                variant="dark"
-                                className="back-button"
-                                onClick={() => { onBackClick(null); }}
-                            >
-                                Back
-                            </Button>
-
-                            <Button
-                                variant="dark"
-                                className="fav-button"
-                                type="button"
-                                onClick={() => addFavourite(movie._id)}
-                            >
-                                Add to Favourites
-                            </Button>
-
                         </Card.Body>
+                        <Card.Footer>
+                            <Col>
+
+                                <Link to={`/genres/${movie.Genre.Name}`}>
+                                    <Button className="genre-button" variant="primary">Genre</Button>
+                                </Link>
+                            </Col>
+                            <Col>
+
+                                <Link to={`/directors/${movie.Director.Name}`}>
+                                    <Button className="director-button" variant="primary">Director</Button>
+                                </Link>
+                            </Col>
+                            <Col>
+                                <Button
+                                    variant="primary"
+                                    className="fav-button"
+                                    type="button"
+                                    onClick={() => addFavourite(movie._id)}
+                                >
+                                    Add to Favourites
+                                </Button>
+                            </Col>
+
+
+
+                        </Card.Footer>
                     </Card >
+
+                    <Button
+                        variant="primary"
+                        className="back-button"
+                        onClick={() => { onBackClick(null); }}
+                    >
+                        Back
+                    </Button>
 
                 </Col>
             </Row>
         );
     }
 }
+
 MovieView.propTypes = {
     movie: PropTypes.shape({
         Title: PropTypes.string.isRequired,
