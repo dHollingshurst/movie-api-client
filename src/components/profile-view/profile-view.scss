@@ -1,10 +1,12 @@
-.profile-movie-card-link {
-    display: flex;
-}
-
 .fav-card {
     display: flex;
+    margin-top: 10px;
 }
+
+a {
+    appearance: none;
+}
+
 
 .update-profile-button,
 .back-button,
@@ -55,3 +57,34 @@
     box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
     transform: translateY(-2px);
 }
+
+/* responsive classes should be at the end of sheet, so that they can overwrite.
+ This @media  allows for the specification of rules to screen sizes*/
+
+/* @supports (display: grid) {
+
+    .fav-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 15px;
+        margin: 50px;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .fav-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media all and (min-width: 500px) and (max-width: 750px) {
+    .fav-group {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media all and (max-width: 750px) {
+    .fav-group {
+        grid-gap: 10px;
+    }
+} */

@@ -6,7 +6,7 @@
   background-color: #3ea7b8;
 }
 
-.main-card, .card-body, .movie-img, .card-footer {
+.main-card, .card-body, .movie-img, .card-footer, .card-header {
   min-width: 100%;
   background-image: radial-gradient(100% 100% at 100% 0, #cacfd0 0, #3ea7b8 100%);
   box-shadow: 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3a416f80;
@@ -267,8 +267,13 @@ a {
   box-shadow: 0 4px 8px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3c4fe0;
 }
 
-.profile-movie-card-link, .fav-card {
+.fav-card {
+  margin-top: 10px;
   display: flex;
+}
+
+a {
+  appearance: none;
 }
 
 .update-profile-button, .back-button, .remove-fav-button, .unregister-button {

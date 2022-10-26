@@ -242,9 +242,9 @@ export function ProfileView(props) {
 
             <h3>Favourite Movies</h3>
 
-            <CardGroup>
+            <CardGroup className="fav-group">
                 {favouriteMoviesList.map((m) => (
-                    <Col
+                    <Col className="fav-card"
                         xs={12}
                         md={6}
                         lg={3}
@@ -252,27 +252,46 @@ export function ProfileView(props) {
 
                     >
                         <Card>
-                            {<Link
-                                to={`/movies/${m._id}`}
-                                className="profile-movie-card-link"
-                            >
+                            <CardHeader className="card-header">
                                 <Card.Img
+                                    className="movie-img"
                                     variant="top"
                                     src={m.ImagePath}
                                 />
-                            </Link>}
+                            </CardHeader>
+
                             <Card.Body>
                                 <Card.Title>{m.Title}</Card.Title>
                             </Card.Body>
 
-                            <Button
-                                className="remove-fav-button"
-                                size="sm"
-                                type="button"
-                                onClick={() => removeFavourite(m._id)}
-                            >
-                                Remove
-                            </Button>
+                            <Card.Footer>
+                                <Col>
+                                    <Button
+                                        className="remove-fav-button"
+                                        size="sm"
+                                        type="button"
+                                        onClick={() => removeFavourite(m._id)}
+                                    >
+                                        Remove
+                                    </Button>
+
+                                </Col>
+
+                                <Col>
+                                    {<Link
+                                        className="movie-img"
+                                        to={`/movies/${m._id}`}
+                                    >
+                                        <Button
+                                            className="movie-view-button">
+                                            Open
+                                        </Button>
+                                    </Link>}
+
+
+                                </Col>
+
+                            </Card.Footer>
 
                         </Card>
                     </Col>
