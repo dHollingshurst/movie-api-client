@@ -278,15 +278,15 @@ export function ProfileView(props) {
                                 </Col>
 
                                 <Col>
-                                    {<Link
-                                        className="movie-img"
+                                    <Link
                                         to={`/movies/${m._id}`}
                                     >
                                         <Button
+
                                             className="movie-view-button">
                                             Open
                                         </Button>
-                                    </Link>}
+                                    </Link>
 
 
                                 </Col>

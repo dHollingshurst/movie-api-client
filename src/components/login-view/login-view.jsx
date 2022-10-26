@@ -65,10 +65,12 @@ export function LoginView(props) {
 
             <Container>
                 <Row>
+                    <Col></Col>
+
                     <Col>
                         <CardGroup>
-                            <Card>
-                                <Card.Body className="loginBody">
+                            <Card className="login-card">
+                                <Card.Body className="login-body">
                                     <Card.Title>Login here</Card.Title>
                                     <Form>
                                         <Row>
@@ -100,33 +102,35 @@ export function LoginView(props) {
                                                 </Form.Group>
                                             </Col>
                                         </Row>
-
-                                        <Row>
-                                            <Col>
-                                                <Button className="mb-3"
-                                                    variant="primary"
-                                                    type="submit"
-                                                    onClick={handleSubmit}>
-                                                    Submit
-                                                </Button> <br />
-
-                                                New user? <br />
-
-
-                                                <Link to={'/register'}>Sign up</Link>
-
-                                            </Col>
-                                        </Row>
                                     </Form>
+                                    <Button className="login-button"
+                                        variant="primary"
+                                        type="submit"
+                                        onClick={handleSubmit}>
+                                        Submit
+                                    </Button> <br />
                                 </Card.Body>
+                                <Card.Footer>
+                                    <Row>
+                                        <Col>
+
+                                            <Link
+                                                to={'/register'}
+                                            >
+                                                <Button
+                                                    className="signin-button">
+                                                    New user? Sign up
+                                                </Button>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                </Card.Footer>
                             </Card>
                         </CardGroup>
-
                     </Col>
                     <Col>
                     </Col>
                 </Row>
-
             </Container>
         </div>
     );

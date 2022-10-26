@@ -15,7 +15,9 @@ export class MovieCard extends React.Component {
                     <Card.Title>{movie.Title}</Card.Title>
                 </Card.Body>
                 <Card.Footer className='card-footer'>
-                    <Link to={`/movies/${movie._id}`}>
+                    <Link
+                        to={`/movies/${movie._id}`}
+                    >
                         <Button
                             className="movie-view-button"
                             variant="primary"
