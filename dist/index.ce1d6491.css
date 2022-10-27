@@ -2,63 +2,6 @@
   color: #adc8cf;
 }
 
-.movieImg {
-  background-color: #3ea7b8;
-}
-
-.main-card, .card-body, .movie-img, .card-footer, .card-header {
-  min-width: 100%;
-  background-image: radial-gradient(100% 100% at 100% 0, #cacfd0 0, #3ea7b8 100%);
-  box-shadow: 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3a416f80;
-}
-
-.card-body {
-  background-color: #3ea7b8;
-}
-
-.movie-view-button {
-  min-width: 100%;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  appearance: none;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  height: 48px;
-  text-align: left;
-  -webkit-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  will-change: box-shadow, transform;
-  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #202c86 100%);
-  border: 0;
-  border-radius: 6px;
-  justify-content: center;
-  margin-top: 10px;
-  margin-right: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
-  font-size: 18px;
-  line-height: 1;
-  text-decoration: none;
-  list-style: none;
-  transition: box-shadow .15s, transform .15s;
-  display: inline-flex;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3a416f80;
-}
-
-.movie-view-button:focus {
-  box-shadow: inset 0 0 0 1.5px #3c4fe0, 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3c4fe0;
-}
-
-.movie-view-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3c4fe0;
-}
-
 a {
   appearance: none;
 }
@@ -370,6 +313,10 @@ a {
   display: flex;
 }
 
+.profile-card, .fav-group, .fav-title {
+  margin-top: 25px;
+}
+
 .update-profile-button, .back-button, .remove-fav-button, .unregister-button, .movie-view-button {
   appearance: none;
   box-sizing: border-box;
@@ -412,6 +359,63 @@ a {
 
 .movie-view-button, .remove-fav-button {
   min-width: 100%;
+}
+
+.movieImg {
+  background-color: #3ea7b8;
+}
+
+.main-card, .card-body, .movie-img, .card-footer, .card-header {
+  min-width: 100%;
+  background-image: radial-gradient(100% 100% at 100% 0, #cacfd0 0, #3ea7b8 100%);
+  box-shadow: 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3a416f80;
+}
+
+.card-body {
+  background-color: #3ea7b8;
+}
+
+.movie-view-button {
+  min-width: 100%;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  appearance: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  height: 48px;
+  text-align: left;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #202c86 100%);
+  border: 0;
+  border-radius: 6px;
+  justify-content: center;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 18px;
+  line-height: 1;
+  text-decoration: none;
+  list-style: none;
+  transition: box-shadow .15s, transform .15s;
+  display: inline-flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3a416f80;
+}
+
+.movie-view-button:focus {
+  box-shadow: inset 0 0 0 1.5px #3c4fe0, 0 2px 4px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3c4fe0;
+}
+
+.movie-view-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px #2d234266, 0 7px 13px -3px #2d23424d, inset 0 -3px #3c4fe0;
 }
 
 /*# sourceMappingURL=index.ce1d6491.css.map */

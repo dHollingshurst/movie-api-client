@@ -19,20 +19,6 @@ export class GenreView extends React.Component {
                             <Card.Text>
                                 {genre.Description}
                             </Card.Text>
-
-                            {/*     <Card.Text>
-                                <Row className="justify-content-center mt-3">
-                                    {genreMovies.map((movie) => (
-                                        <MovieCard
-                                            key={movie.id}
-                                            movie={movie}>
-                                            {movie.Title}
-                                        </MovieCard>
-                                    ))}
-                                </Row>
-                            </Card.Text> */}
-
-
                         </Card.Body>
                         <Card.Footer>
                             <Button

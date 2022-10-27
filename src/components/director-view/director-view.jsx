@@ -17,18 +17,6 @@ export class DirectorView extends React.Component {
                             <Card.Text>
                                 {director.Bio}
                             </Card.Text>
-
-                            {/*     <Card.Text>
-                                <Row className="justify-content-center mt-3">
-                                    {directorMovies.map((movie) => (
-                                        <MovieCard
-                                            key={movie.id}
-                                            movie={movie}>
-                                            {movie.Title}
-                                        </MovieCard>
-                                    ))}
-                                </Row>
-                            </Card.Text> */}
                         </Card.Body>
                         <Card.Footer>
                             <Button

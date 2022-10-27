@@ -152,7 +152,7 @@ export function ProfileView(props) {
         <Container className="profile-container">
             <Row>
                 <Col></Col>
-                <Col xs={12} md={6} sm={8}>
+                <Col xs={12} md={6} sm={8} className="profile-card">
 
                     <Card>
                         <Card.Body>
@@ -240,7 +240,7 @@ export function ProfileView(props) {
 
 
 
-            <h3>Favourite Movies</h3>
+            <h3 className="fav-title">Favourite Movies</h3>
 
             <CardGroup className="fav-group">
                 {favouriteMoviesList.map((m) => (
@@ -254,7 +254,6 @@ export function ProfileView(props) {
                         <Card>
                             <CardHeader className="card-header">
                                 <Card.Img
-                                    className="movie-img"
                                     variant="top"
                                     src={m.ImagePath}
                                 />

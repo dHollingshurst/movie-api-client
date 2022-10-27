@@ -1,20 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from 'react-bootstrap/Container';
+import { createStore } from 'redux'; // recommends using configureStore as create is deprecated
+import { Provider } from 'react-redux';
+import moviesApp from './reducers/reducers';
+import { devToolsEnhancer } from 'redux-devtools-extension';
+
+
 import MainView from './components/main-view/main-view';
-import { Form, Button, Card, CardGroup, Container, Col, Row, Navbar, Nav } from 'react-bootstrap';
 
 
 // Import statement to indicate that you need to bundle `./index.scss`
 import './index.scss';
 
+const store = createStore(moviesApp, devToolsEnhancer());
+
 // Main component (will eventually use all the others)
 class MyFlixApplication extends React.Component {
     render() {
         return (
-
-            <MainView />
-
-
+            <Provider store={store}>
+                <Container>
+                    <MainView />
+                </Container>
+            </Provider>
         );
     }
 }
