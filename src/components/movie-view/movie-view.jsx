@@ -4,6 +4,8 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import Switch from "react-switch";
 import './movie-view.scss';
 import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setFavourite } from "../../actions/actions";
 
 
 
@@ -75,22 +77,15 @@ export class MovieView extends React.Component {
     }
 }
 
-MovieView.propTypes = {
-    movie: PropTypes.shape({
-        Title: PropTypes.string.isRequired,
-        Description: PropTypes.string.isRequired,
-        ImagePath: PropTypes.string.isRequired,
-        Genre: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Description: PropTypes.string.isRequired,
-        }).isRequired,
-        Actors: PropTypes.array.isRequired,
-        Director: PropTypes.shape({
-            Name: PropTypes.string.isRequired,
-            Bio: PropTypes.string.isRequired,
-            Birth: PropTypes.string.isRequired,
-            Death: PropTypes.string,
-        }).isRequired,
-    }).isRequired,
-    onBackClick: PropTypes.func.isRequired,
-};
+let mapStateToProps = state => {
+    return {
+        user: state.user,
+        movies: state.movies
+    };
+}
+let mapDispatchToProps = (dispatch) => ({
+    addFavourite: (event) =>
+        dispatch(setFavourite(event))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieView);

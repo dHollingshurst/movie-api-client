@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Redirect, Routes, Route, Redirect, Link } from
 import { render } from "react-dom";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import './profile-view.scss';
+import { connect } from "react-redux";
+import { deleteFavourite } from "../../actions/actions";
 
 
 
@@ -26,7 +28,7 @@ export function ProfileView(props) {
     const { user, removeFavourite, onBackClick, movies } = props;
 
 
-
+    // let mikeUser = this.props.stateUser;
 
     const validate = () => {
         let isReq = true;
@@ -62,15 +64,7 @@ export function ProfileView(props) {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((response) => {
-                // this.setState({
-                //   Username: response.data.Username,
-                //   Password: response.data.Password,
-                //   Email: response.data.Email,
-                //   Birthday: response.data.Birthday,
-                //   FavouriteMovies: response.data.FavouriteMovies,
-                // });
                 setUsername(response.data.Username);
-                //setPassword(response.data.Password);
                 setEmail(response.data.Email);
                 setBirthday(response.data.Birthday);
                 setFavouriteMovies(response.data.FavouriteMovies);
@@ -310,6 +304,16 @@ export function ProfileView(props) {
     );
 }
 
-/* ProfileView.propTypes = {
-    favouriteMovies: PropTypes.array.isRequired,
-}; */
+
+let mapStateToProps = state => {
+    return {
+        stateUser: state.user
+    }
+}
+
+let mapDispatchToProps = (dispatch) => ({
+    removeFavourite: (event) =>
+        dispatch(deleteFavourite(event))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);
