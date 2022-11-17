@@ -7,7 +7,7 @@ import { render } from "react-dom";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import './profile-view.scss';
 import { connect } from "react-redux";
-import { deleteFavourite } from "../../actions/actions";
+import { deleteFavourite, updateUser } from "../../actions/actions";
 
 
 
@@ -28,7 +28,6 @@ export function ProfileView(props) {
     const { user, removeFavourite, onBackClick, movies } = props;
 
 
-    // let mikeUser = this.props.stateUser;
 
     const validate = () => {
         let isReq = true;
@@ -57,6 +56,7 @@ export function ProfileView(props) {
 
         return isReq;
     }
+
     getUser = (token) => {
         const Username = localStorage.getItem('user');
         axios
@@ -86,13 +86,11 @@ export function ProfileView(props) {
         e.preventDefault();
         const isReq = validate();
         const token = localStorage.getItem('token');
-        console.log(isReq);
-        console.log(token);
-        console.log(user);
-        if (isReq && token !== null && user !== null) {
+        let loggedInUsername = user.Username;
+        if (isReq && token !== null && loggedInUsername !== null) {
             axios
                 .put(
-                    `https://davemoviebase.herokuapp.com/users/${user}`,
+                    `https://davemoviebase.herokuapp.com/users/${loggedInUsername}`,
 
                     {
                         Username: username,
@@ -106,12 +104,15 @@ export function ProfileView(props) {
                         },
                     }
                 )
-                .then((res) => {
-                    const data = res.data;
-                    console.log(data);
+                .then((response) => {
                     alert('Update successful! Please log in with your new credentials');
                     localStorage.clear();
-                    window.open('/', '_self');
+                    if (loggedInUsername !== username) {
+                        window.open(`/`, '_self');
+                    } else {
+                        window.open(`/users/${username}`, '_self');
+                    }
+
                 })
                 .catch((e) => {
                     console.error(e);
@@ -123,7 +124,7 @@ export function ProfileView(props) {
 
     const handleDelete = (e) => {
         e.preventDefault();
-        const username = localStorage.getItem("user");
+        const username = user.Username;
         const token = localStorage.getItem("token");
 
         axios.delete(`https://davemoviebase.herokuapp.com/users/${username}`, {
@@ -307,13 +308,16 @@ export function ProfileView(props) {
 
 let mapStateToProps = state => {
     return {
-        stateUser: state.user
+        user: state.user,
+        movies: state.movies
     }
 }
 
 let mapDispatchToProps = (dispatch) => ({
     removeFavourite: (event) =>
-        dispatch(deleteFavourite(event))
+        dispatch(deleteFavourite(event)),
+    handleUpdate: (event) =>
+        dispatch(updateUser(event))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);

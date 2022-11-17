@@ -132,7 +132,7 @@ class MainView extends React.Component {
                     this.props.setUser({
                         FavouriteMovies: favouriteMovies,
                     });
-                    window.open(`/users/${user}`, "_self");
+                    window.open(`/users/${username}`, "_self");
                 })
                 .catch((e) => {
                     console.error(e);
