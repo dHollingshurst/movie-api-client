@@ -1,7 +1,7 @@
 export const SET_MOVIES = 'SET_MOVIES';
 export const SET_FILTER = 'SET_FILTER';
 export const SET_USER = 'SET_USER';
-export const ADD_FAVOURITE = 'SET_FAVOURITE';
+export const SET_FAVOURITE = 'SET_FAVOURITE';
 export const DELETE_FAVOURITE = 'DELETE_FAVOURITE';
 export const UPDATE_USER = 'UPDATE_USER';
 
